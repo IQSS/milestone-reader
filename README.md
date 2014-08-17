@@ -5,7 +5,7 @@ Mini project to read/aggregate milestones from several github repositories so th
 
 ### Setup
 
-* Install.  (Assumes virtualenvwrapper)
+* Install.  (Assumes [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/en/latest/install.html#basic-installation))
 
 ```
 git clone git@github.com:IQSS/milestone-reader.git
@@ -19,9 +19,9 @@ python manage.py runserver
 
 #### Add your repository
 
-1. Navigate to (http://127.0.0.1:8000/milestone-reader-admin)
-1. Enter an organization (127.0.0.1:8000/milestone-reader-admin/repositories/organization/add/)
-1. Enter a repository (127.0.0.1:8000/milestone-reader-admin/repositories/repository/add/)
+1. Navigate to http://127.0.0.1:8000/milestone-reader-admin
+1. Enter an organization http://127.0.0.1:8000/milestone-reader-admin/repositories/organization/add/
+1. Enter a repository http://127.0.0.1:8000/milestone-reader-admin/repositories/repository/add/
 
 
 
