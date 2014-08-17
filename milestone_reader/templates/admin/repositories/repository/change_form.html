@@ -1,0 +1,11 @@
+{% extends "admin/change_form.html" %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<div style="padding:10px; margin:10px; border:1px solid #006699; width:500px;">
+    To see your organization's information, use this url template:
+    <br /><br />https://api.github.com/repos/<b>[organization name]</b>/<b>[repository name]<b>
+    <br /><br />Example: <a href="https://api.github.com/repos/IQSS/dataverse" target="_blank">https://api.github.com/repos/IQSS/dataverse</a>
+    </p>
+</div>
+{% endblock %}

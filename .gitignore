@@ -1,3 +1,8 @@
+milestone_reader/assets/*
+milestone_reader/milestone_reader/settings/prod*
+test_setup/*
+docs/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
