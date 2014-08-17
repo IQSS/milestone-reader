@@ -2,7 +2,7 @@ from django.db import models
 from model_utils.models import TimeStampedModel
 
 from apps.repositories.models import Repository
-from apps.repositories.github_url_helper import get_github_api_milestones_url, get_github_view_url
+from apps.repositories.github_url_helper import get_github_view_url
 
 
     
@@ -41,9 +41,7 @@ class Milestone(TimeStampedModel):
     def get_view_milestone_url(self):
         return get_github_view_url(self)
 
-    def get_github_api_url(self):
-        return get_github_api_milestones_url(self)
-        
+
     class Meta:
         ordering = ('repository', 'github_due_date', 'title')
 

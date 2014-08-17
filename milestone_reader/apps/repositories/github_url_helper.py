@@ -1,7 +1,7 @@
 
 GITHUB_VIEW_URL_BASE = 'https://github.com'
 GITHUB_API_URL_BASE = 'https://api.github.com'
-def urljoin(parts):
+def urljoin(*parts):
     return "/".join(map(lambda x: str(x).rstrip('/'), parts))
     
 def get_github_view_url(github_obj):
@@ -24,6 +24,7 @@ def get_github_view_url(github_obj):
     return None
     
 def get_github_api_milestones_url(repository):
+    print 'repository', repository
     """
     Given a repository project, return a url with this structure:
     
@@ -34,11 +35,11 @@ def get_github_api_milestones_url(repository):
     :returns: str representing github api url
     """
     if not repository.__class__.__name__ == 'Repository':
-        return null
+        return None
         
-        return urljoin(GITHUB_API_URL_BASE\
+    return urljoin(GITHUB_API_URL_BASE\
                     , 'repos'
-                    , repository.organization.github_name\
+                    , repository.organization.github_login\
                     , repository.github_name
                     , 'milestones?state=all')
                     

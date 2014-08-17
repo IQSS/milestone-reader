@@ -268,5 +268,5 @@ SOUTH_TESTS_MIGRATE = False
 #
 github_secrets_fname = join( dirname(abspath(__file__)), "github_api_secrets.json")
 github_secrets_json = json.loads(open(github_secrets_fname, 'r').read())
-REPOSITORY_PASSWORD_DICT = github_secrets_json['GITHUB_API_ACCESS_TOKENS']
+GITHUB_REPOSITORY_PASSWORD_DICT = github_secrets_json['GITHUB_API_ACCESS_TOKEN_INFO']
 ########## END GITHUB API KEY CONFIGURATION
