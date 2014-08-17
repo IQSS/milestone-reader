@@ -1,6 +1,6 @@
 """Common settings and globals."""
 
-
+import json
 import os
 from os.path import abspath, basename, dirname, join, normpath, isdir
 from sys import path
@@ -259,5 +259,14 @@ SOUTH_TESTS_MIGRATE = False
 ########## END SOUTH CONFIGURATION
 
 ########## GITHUB API KEY CONFIGURATION
-READ_REPOSITORY_PASSWORD_KEYS = { 'iqss_read' : 'somekey' }
+#
+#  See "github_api_secrets_template.json" for an example
+#
+#  dict of { 'repository-name' : 'github-api-personal-access-token' 
+#               , 'repository-name 2' : 'github-api-personal-access-token (same or different)' 
+#               }
+#
+github_secrets_fname = join( dirname(abspath(__file__)), "github_api_secrets.json")
+github_secrets_json = json.loads(open(github_secrets_fname, 'r').read())
+REPOSITORY_PASSWORD_DICT = github_secrets_json['GITHUB_API_ACCESS_TOKENS']
 ########## END GITHUB API KEY CONFIGURATION

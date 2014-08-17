@@ -5,13 +5,34 @@ Mini project to read/aggregate milestones from several github repositories so th
 
 ### Setup
 
-* Install.  (Assumes [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/en/latest/install.html#basic-installation))
+### Initial Install.  
+
+(Assumes [virtualenvwrapper](http://virtualenvwrapper.readthedocs.org/en/latest/install.html#basic-installation))
 
 ```
 git clone git@github.com:IQSS/milestone-reader.git
 cd milestone-reader
 mkvirtualenv milestones
 pip install -r requirements/local.txt
+```
+
+#### Create file with GitHub personal access token
+
+1.  Create a file name ```github_api_secrets.json``` and take proper care of it
+
+```
+cd ~/milestone-reader/milestone_reader/milestone_reader/settings
+cp github_api_secrets_template.json github_api_secrets.json
+```
+
+1. Open the newly created (copied) ```github_api_secrets.json```
+1. For each of your repositories, add the name and an appropriate [GitHub Api Token](https://github.com/blog/1509-personal-api-tokens)
+   * If you have api read access to several repositories under one organization, you may only need one API token, but it will be repeated for each repository.
+
+
+#### Create the database and run the server (development mode example)
+
+```
 cd milestone_reader
 python manage.py syncdb
 python manage.py runserver

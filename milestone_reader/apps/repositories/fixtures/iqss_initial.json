@@ -1,0 +1,62 @@
+[
+{
+    "pk": 1, 
+    "model": "repositories.organization", 
+    "fields": {
+        "github_login": "IQSS", 
+        "github_id": 675237, 
+        "created": "2014-08-17T18:36:04.253Z", 
+        "modified": "2014-08-17T18:37:20.525Z", 
+        "github_name": "Institute for Quantitative Social Science\"", 
+        "homepage": ""
+    }
+},
+{
+    "pk": 1, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "description": "drop table repositories_repository;", 
+        "github_id": 11134522, 
+        "created": "2014-08-17T19:09:18.653Z", 
+        "display_order": 20, 
+        "modified": "2014-08-17T19:11:42.589Z", 
+        "last_retrieval_time": null, 
+        "organization": 1, 
+        "github_name": "TwoRavens", 
+        "homepage": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "description": "The next generation code base, distinct from https://github.com/IQSS/dvn", 
+        "github_id": 14051004, 
+        "created": "2014-08-17T19:10:56.066Z", 
+        "display_order": 10, 
+        "modified": "2014-08-17T19:10:56.080Z", 
+        "last_retrieval_time": null, 
+        "organization": 1, 
+        "github_name": "dataverse", 
+        "homepage": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "description": "BARI project: Connecting the Dataverse and WorldMap", 
+        "github_id": 19804703, 
+        "created": "2014-08-17T19:11:30.418Z", 
+        "display_order": 30, 
+        "modified": "2014-08-17T19:11:42.607Z", 
+        "last_retrieval_time": null, 
+        "organization": 1, 
+        "github_name": "geoconnect", 
+        "homepage": ""
+    }
+}
+]

@@ -23,7 +23,7 @@ class Milestone(TimeStampedModel):
     num_open_issues = models.IntegerField()
     num_closed_issues = models.IntegerField()
 
-    github_due_date = models.DateTimeField(blank=True)
+    github_due_date = models.DateTimeField(blank=True, null=True)
     github_updated_at = models.DateTimeField()
     
     last_retrieval_time = models.DateTimeField()

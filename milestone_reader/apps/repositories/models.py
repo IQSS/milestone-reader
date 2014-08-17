@@ -16,7 +16,6 @@ class Organization(TimeStampedModel):
     github_login = models.CharField(max_length=255, help_text='"login" in the API call. Example: "IQSS"')
     github_name = models.CharField(max_length=255, help_text='Example: "Institute for Quantitative Social Science"')
     github_id = models.IntegerField()
-    api_url = models.URLField(help_text='https://api.github.com/orgs/IQSS')
     homepage = models.URLField(blank=True)
 
     def __unicode__(self):
@@ -31,19 +30,15 @@ class Repository(TimeStampedModel):
     organization = models.ForeignKey(Organization)
 
     github_id = models.IntegerField()
-    api_url = models.URLField(help_text='https://api.github.com/repos/IQSS/dataverse')
 
     is_visible = models.BooleanField(default=True)
 
     display_order = models.IntegerField(default=10)
 
-    description = models.TextField(help_text='auto-filled')
+    description = models.TextField(blank=True, help_text='auto-filled')
     homepage = models.URLField(blank=True, help_text='auto-filled')
-
     
-    credential_name = models.CharField(max_length=255, help_text='variable name of api key in settings file')
-
-    last_retrieval_time = models.DateTimeField(blank=True)
+    last_retrieval_time = models.DateTimeField(blank=True, null=True)
     
     def __unicode__(self):
         return self.github_name
