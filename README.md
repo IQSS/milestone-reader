@@ -18,7 +18,7 @@ pip install -r requirements/local.txt
 
 #### Create file with GitHub personal access token
 
-1.  Create a file name ```github_api_secrets.json``` and take proper care of it
+1.  Create a file name [```github_api_secrets.json```](https://github.com/IQSS/milestone-reader/blob/master/milestone_reader/milestone_reader/settings/github_api_secrets_template.json) and take proper care of it
 
 ```
 cd ~/milestone-reader/milestone_reader/milestone_reader/settings
