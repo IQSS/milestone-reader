@@ -54,6 +54,7 @@ python milestone_retriever.py
 #### View the milestones (basic template)
 
 * Go to http://127.0.0.1:8000/milestones/by-due-date/
+![GitHub Logo](https://github.com/IQSS/milestone-reader/blob/master/milestone_reader/static/images/open_milestones.png)
 
 ### Notes
 
