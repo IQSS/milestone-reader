@@ -50,11 +50,15 @@ python manage.py runserver
 cd ~/milestone-reader/milestone_reader/apps/milestones/
 python milestone_retriever.py
 ```
+
+* Example of Milestones listed in the admin
 ![retrieved milestones](https://github.com/IQSS/milestone-reader/blob/master/milestone_reader/static/images/retrieved_milestones.png)
 
 #### View the milestones (basic template)
 
 * Go to http://127.0.0.1:8000/milestones/by-due-date/
+
+* Example of a basic template:
 ![open issues list](https://github.com/IQSS/milestone-reader/blob/master/milestone_reader/static/images/open_milestones.png)
 
 ### Notes
