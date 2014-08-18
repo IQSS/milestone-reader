@@ -38,13 +38,22 @@ python manage.py syncdb
 python manage.py runserver
 ```
 
-#### Add your repository
+#### Add your repositories
 
 1. Navigate to http://127.0.0.1:8000/milestone-reader-admin
 1. Enter an organization http://127.0.0.1:8000/milestone-reader-admin/repositories/organization/add/
 1. Enter a repository http://127.0.0.1:8000/milestone-reader-admin/repositories/repository/add/
 
+#### Retrieve the milestones
 
+```
+cd ~/milestone-reader/milestone_reader/apps/milestones/
+python milestone_retriever.py
+```
+
+#### View the milestones (basic template)
+
+* Go to http://127.0.0.1:8000/milestones/by-due-date/
 
 ### Notes
 
