@@ -7,4 +7,6 @@ urlpatterns = patterns('apps.milestones.views',
     
     url(r'^by-due-date/$', 'view_by_due_date', name="view_by_due_date"),
 
+    url(r'^by-columns/$', 'view_by_columns', name="view_by_columns"),
+
 )

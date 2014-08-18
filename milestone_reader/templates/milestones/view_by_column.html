@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+<!-- START: CONTENT -->{% block content %}
+<br /><br /><b>{{ milestone_count }}</b> milestone{{ milestone_count|pluralize }} found.
+
+<table class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>Month</th>
+            {% for repo in sorted_repos %}
+            <th><a href="{{ repo.get_github_view_url }}">{{ repo }}</a></th>
+            {% endfor %}
+        </tr>
+    </thead>
+    {% for org_month in organized_months %}
+    <tr>
+        {% for month_milestone_info in org_month %}
+            {% if forloop.first %}
+                <td>{% if month_milestone_info.month == NO_DUE_DATE %}
+                        <span class="badge">no due date</span>
+                    {% else %}
+                        <span class="badge">{{ month_milestone_info.month|date:"M Y" }}</span>
+                    {% endif %}
+                </td>
+            {% endif %}
+            <td width="33%">{% for ms in month_milestone_info.milestones %}
+                    <div class="well">
+                        {% if ms.due_on %}
+                         <span class="badge">{{ ms.due_on|date:"M j" }}</span>
+                        {% else %}
+                         <span class="badge">no due date</span>
+                        {% endif %}
+                        <br /><a href="{{ ms. }}" xclass="btn btn-info btn-sm">{{ ms.title }}</a>
+                    </div>
+
+
+                {% empty %}
+                   &nbsp;
+                {% endfor %}
+            </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+<!-- END: CONTENT -->{% endblock  %}

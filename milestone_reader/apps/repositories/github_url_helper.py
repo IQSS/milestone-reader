@@ -31,7 +31,7 @@ def get_github_view_url(github_obj, is_closed=False):
     elif class_name == 'Repository':
         # https://api.github.com/repos/IQSS/dataverse
         return urljoin(GITHUB_VIEW_URL_BASE\
-                    , 'repos'\
+                    #, 'repos'\
                     , github_obj.organization.github_login\
                     , github_obj.github_name)
                     

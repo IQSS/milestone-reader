@@ -48,7 +48,10 @@ class Repository(TimeStampedModel):
     class Meta:
         verbose_name_plural = 'Repositories'
         ordering = ('display_order', 'github_name' )
-        
+
+    def get_github_view_url(self):
+        return get_github_view_url(self)
+
     def get_github_api_url(self):
         return get_github_api_milestones_url(self)
     

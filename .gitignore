@@ -3,7 +3,8 @@ milestone_reader/milestone_reader/settings/prod*
 test_setup/*
 docs/*
 *github_api_secrets.json
-
+*/.idea/
+.idea/*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
