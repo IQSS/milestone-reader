@@ -61,6 +61,9 @@ python milestone_retriever.py
 * Example of a basic template:
 ![open issues list](https://github.com/IQSS/milestone-reader/blob/master/milestone_reader/static/images/open_milestones.png)
 
+* Example of milestones by month, across repos:
+![open issues list](https://github.com/IQSS/milestone-reader/blob/master/milestone_reader/static/images/milestones_by_month.png)
+
 ### Notes
 
 * Started with [django-twoscoops-project template](https://github.com/twoscoops/django-twoscoops-project)
