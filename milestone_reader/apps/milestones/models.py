@@ -46,9 +46,12 @@ class Milestone(TimeStampedModel):
         # do something...
         super(Milestone, self).save(*args, **kwargs)
         
-    def get_view_milestone_url(self):
+    def get_view_open_issues_url(self):
         return get_github_view_url(self)
 
+    def get_view_closed_issues_url(self):
+        #print 'get_github_view_url(self, is_closed=True)', get_github_view_url(self, is_closed=True)
+        return get_github_view_url(self, is_closed=True)
 
     class Meta:
         ordering = ('repository', 'due_on', 'title')

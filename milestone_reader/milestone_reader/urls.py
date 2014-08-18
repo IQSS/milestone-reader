@@ -12,7 +12,7 @@ urlpatterns = patterns('',
 
     # Examples:
     # url(r'^$', 'milestone_reader.views.home', name='home'),
-    # url(r'^milestone_reader/', include('milestone_reader.foo.urls')),
+    url(r'^milestones/', include('apps.milestones.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

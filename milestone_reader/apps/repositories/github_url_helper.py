@@ -4,22 +4,41 @@ GITHUB_API_URL_BASE = 'https://api.github.com'
 def urljoin(*parts):
     return "/".join(map(lambda x: str(x).rstrip('/'), parts))
     
-def get_github_view_url(github_obj):
+def get_github_view_url(github_obj, is_closed=False):
     if github_obj is None:
         return None
     
     class_name = github_obj.__class__.__name__
     if class_name == 'Milestone':
+
+        if is_closed:
+            # https://github.com/IQSS/geoconnect/issues?q=is:closed+milestone:"{ milestone title }"+
+            return urljoin(GITHUB_VIEW_URL_BASE\
+                        , github_obj.repository.organization.github_login\
+                        , github_obj.repository.github_name\
+                        , 'issues?q=is:closed+milestone:"%s"' % github_obj.title\
+                    )
+            
+            
+        # https://github.com/IQSS/geoconnect/milestones/{ milestone name }
         return urljoin(GITHUB_VIEW_URL_BASE\
-                    , github_obj.repository.organization.github_name\
+                    , github_obj.repository.organization.github_login\
                     , github_obj.repository.github_name\
-                    , github_obj.github_name)
+                    , 'milestones'\
+                    , github_obj.title)
+        
+                    
     elif class_name == 'Repository':
+        # https://api.github.com/repos/IQSS/dataverse
         return urljoin(GITHUB_VIEW_URL_BASE\
-                    , github_obj.organization.github_name\
+                    , 'repos'\
+                    , github_obj.organization.github_login\
                     , github_obj.github_name)
+                    
     elif class_name == 'Organization':
+        # https://api.github.com/orgs/IQSS
         return urljoin(GITHUB_VIEW_URL_BASE\
+                    , 'orgs'\
                     , github_obj.github_name)
     return None
     

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+<!-- START: CONTENT -->{% block content %}
+
+<a href="{% url 'view_by_due_date' %}">all</a>
+{% for r in repos %}
+    {% if r.github_name == chosen_repository %}
+    &nbsp;|&nbsp; <b>{{ r.github_name }}</b>
+    {% else %}
+    &nbsp;|&nbsp; <a href="{% url 'view_repo_by_due_date' r.github_name %}">{{ r.github_name }}</a>
+    {% endif %}
+{% endfor %}
+
+{% if not milestones %}
+No milestones found
+{% endif %}
+{% if milestones %}
+{% if chosen_repository %}
+<br /><br /><b>{{ milestone_count }}</b> open milestone{{ milestone_count|pluralize }} in the <b>{{ chosen_repository }}</b> repository.
+{% else %}
+<br /><br /><b>{{ milestone_count }}</b> milestone{{ milestone_count|pluralize }} found.
+{% endif %}
+<table class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>Repository</th>
+            <th>Milestone</th>
+            <th>Due Date</th>
+        </tr>
+    </thead>
+{% for ms in milestones %}
+    <tr>
+        {% ifchanged ms.repository %}
+        <td><a href="{% url 'view_repo_by_due_date' ms.repository.github_name %}">{{ ms.repository }}</a></td>
+        {% else %}
+        <td>&nbsp;</td>
+        {% endifchanged %}
+        <td>
+            <b><a href="{{ ms.get_view_open_issues_url }}">{{ ms.title }}</a></b>
+            <p>{{ ms.description }}
+                <br /><b>open issues:</b> <a href="{{ ms.get_view_open_issues_url }}">{{ ms.open_issues }}</a>
+                <br /><b>closed issues:</b> <a href="{{ ms.get_view_closed_issues_url }}">{{ ms.closed_issues }}</a>
+            </p>
+        </td>
+        <td>
+            {% if ms.due_on %}
+                {{ ms.due_on|date:"D, F j, Y" }}
+            {% else %}
+                (not set)
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}
+</table>
+{% endif %}
+<!-- END: CONTENT -->{% endblock  %}
