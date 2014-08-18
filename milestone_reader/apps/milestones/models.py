@@ -5,26 +5,34 @@ from apps.repositories.models import Repository
 from apps.repositories.github_url_helper import get_github_view_url
 
 
-    
+GITHUB_TIME_FORMAT_STRING = '%Y-%m-%dT%H:%M:%SZ'
+
 class Milestone(TimeStampedModel):
     """
     Information from API call: https://api.github.com/repos/iqss/dataverse/milestones
     """
     repository = models.ForeignKey(Repository)
 
+    # START: correspond to github fields
+    #
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
 
+    # convert "state" attribute to this variable
     is_open = models.BooleanField(default=True)
     
-    github_id = models.IntegerField(db_index=True)
+    # github 'id' and 'number' fields
+    github_id = models.IntegerField(db_index=True, unique=True)
     github_number = models.IntegerField()
 
-    num_open_issues = models.IntegerField()
-    num_closed_issues = models.IntegerField()
+    # issue counts
+    open_issues = models.IntegerField()
+    closed_issues = models.IntegerField()
 
-    github_due_date = models.DateTimeField(blank=True, null=True)
-    github_updated_at = models.DateTimeField()
+    due_on = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField()
+    #
+    # END: correspond to github fields
     
     last_retrieval_time = models.DateTimeField()
 
@@ -32,7 +40,7 @@ class Milestone(TimeStampedModel):
         return '%s: %s' % (self.repository, self.title)
     
     def __str__(self):
-        return self.__unicode__
+        return self.__unicode__()
     
     def save(self, *args, **kwargs):
         # do something...
@@ -43,6 +51,6 @@ class Milestone(TimeStampedModel):
 
 
     class Meta:
-        ordering = ('repository', 'github_due_date', 'title')
+        ordering = ('repository', 'due_on', 'title')
 
     
