@@ -22,7 +22,7 @@
     <![endif]-->
 
     <!-- This file store project specific CSS -->
-    <link href="{{ STATIC_URL }}css/milestone_reader.css" rel="stylesheet">
+    <link href="{ STATIC_URL }}css/milestone_reader.css" rel="stylesheet">
 
     <!-- Use this to quickly test CSS changes in a template,
         then move to milestone_reader.css -->
@@ -39,7 +39,7 @@
 
       {% block content %}
       <div class="well">
-          Sample Milestone Views
+          Sample Milestone View
         <ul>
             <li><a href="{% url 'view_by_due_date' %}">by Due Date</a></li>
             <li><a href="{% url 'view_by_columns' %}">Multiple columns</a></li>
