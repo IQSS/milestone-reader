@@ -8,5 +8,7 @@ cd /milestone_reader/milestone_reader/milestone_reader/settings
 cp github_api_secrets_template.json github_api_secrets.json 
 cd /milestone_reader/milestone_reader
 # FIXME: need non-interactive setup
-#python manage.py syncdb
+# python manage.py syncdb
+# 0.0.0.0 for vagrant port forwarding to work 
+# python manage.py runserver 0.0.0.0:8000
 echo "Before running, be sure to edit github_api_secrets.json"
