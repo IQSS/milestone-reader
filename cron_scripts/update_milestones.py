@@ -16,3 +16,5 @@ from apps.milestones.milestone_retriever import MilestoneRetriever
 if __name__=='__main__':
     ms = MilestoneRetriever()
     ms.retrieve_milestones()
+    ms.translate_markdown_descriptions_to_html()
+    

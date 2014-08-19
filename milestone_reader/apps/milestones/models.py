@@ -17,6 +17,7 @@ class Milestone(TimeStampedModel):
     #
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    markdown_description = models.TextField(blank=True)
 
     # convert "state" attribute to this variable
     is_open = models.BooleanField(default=True)

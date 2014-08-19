@@ -9,7 +9,7 @@ if __name__=='__main__':
 
 from datetime import datetime
 import requests
-
+import json
 from django.conf import settings
 
 from milestone_reader.utils.msg_util import *
@@ -41,7 +41,40 @@ class MilestoneRetriever:
 
         self.delete_removed_milestones = delete_removed_milestones
         self.retrieval_time = datetime.now()
-            
+    
+    
+    def translate_markdown_descriptions_to_html(self):
+        """Use GitHub's markdown API to translate markdown to html
+        {
+          "text": "Hello world github/linguist#1 **cool**, and #1!",
+          "mode": "gfm",
+          "context": "github/gollum"
+        }
+        """
+        markdown_url = 'https://api.github.com/markdown'
+        mstones = Milestone.objects.select_related(\
+                            'repository', 'repository__organization'\
+                            ).filter(repository__is_visible=True)
+        for ms in mstones:
+            msgt('get markdown for ms: %s' % ms.id)
+            request_auth = (self.github_username, self.get_api_key(ms.repository))
+            context_str = "%s/%s" % (ms.repository.organization.github_login, ms.repository.github_name)
+            payload = { "text" : ms.description\
+                        , "mode" : "gfm"\
+                        , "context" : context_str
+            }
+            print payload
+            r = requests.post(markdown_url, auth=request_auth, data=json.dumps(payload))
+
+            if r.status_code == 200:
+                print r.text
+                ms.markdown_description = r.text
+                ms.save()
+                continue
+            print r.status_code
+            print r.text
+            break
+    
     def retrieve_milestones(self):
         """Iterate through visible repositories and retrieve milestones"""
         
@@ -141,7 +174,7 @@ class MilestoneRetriever:
         if mform.is_valid():
             # valid params 
             valid_milestone_params = mform.cleaned_data
-                        
+            valid_milestone_params['markdown_description'] = ''
             # Does this milestone exist?
             milestone_to_update, created = Milestone.objects.get_or_create(github_id=github_id, defaults=valid_milestone_params)
             
@@ -173,7 +206,7 @@ class MilestoneRetriever:
 if __name__=='__main__':
     ms = MilestoneRetriever()
     ms.retrieve_milestones()
-    
+    ms.translate_markdown_descriptions_to_html()
     #repo = Repository.objects.get(pk=2)
     #milestone_dict = MilestoneForm.get_test_milestone()
     #ms = MilestoneRetriever()
