@@ -34,8 +34,8 @@ cp github_api_secrets_template.json github_api_secrets.json
 
 ```
 cd milestone_reader
-python manage.py syncdb --settings=milestone_reader/settings/local.py
-python manage.py runserver --settings=milestone_reader/settings/local.py
+python manage.py syncdb --settings=milestone_reader.settings.local.py
+python manage.py runserver --settings=milestone_reader.settings.local.py
 ```
 
 #### Add your repositories

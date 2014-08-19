@@ -15,12 +15,14 @@
     "pk": 1, 
     "model": "repositories.repository", 
     "fields": {
-        "is_visible": true, 
+        "is_visible": true,
+		"is_private":true,
         "description": "drop table repositories_repository;", 
         "github_id": 11134522, 
         "created": "2014-08-17T19:09:18.653Z", 
         "display_order": 20, 
-        "modified": "2014-08-17T19:11:42.589Z", 
+        "modified": "2014-08-19T20:17:01.629Z", 
+        "parent_repository": null, 
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "TwoRavens", 
@@ -31,12 +33,14 @@
     "pk": 2, 
     "model": "repositories.repository", 
     "fields": {
-        "is_visible": true, 
+        "is_visible": true,
+		"is_private":true,
         "description": "The next generation code base, distinct from https://github.com/IQSS/dvn", 
         "github_id": 14051004, 
         "created": "2014-08-17T19:10:56.066Z", 
         "display_order": 10, 
         "modified": "2014-08-17T19:10:56.080Z", 
+        "parent_repository": null, 
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "dataverse", 
@@ -47,16 +51,72 @@
     "pk": 3, 
     "model": "repositories.repository", 
     "fields": {
-        "is_visible": true, 
+        "is_visible": true,
+		"is_private":true,
         "description": "BARI project: Connecting the Dataverse and WorldMap", 
         "github_id": 19804703, 
         "created": "2014-08-17T19:11:30.418Z", 
         "display_order": 30, 
         "modified": "2014-08-17T19:11:42.607Z", 
+        "parent_repository": null, 
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "geoconnect", 
         "homepage": ""
+    }
+},
+{
+    "pk": 4, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true,
+		"is_private":true,
+        "description": "Zelig5", 
+        "github_id": 14958190, 
+        "created": "2014-08-19T19:57:07.312Z", 
+        "display_order": 50, 
+        "modified": "2014-08-19T19:59:33.292Z", 
+        "parent_repository": null, 
+        "last_retrieval_time": null, 
+        "organization": 1, 
+        "github_name": "Zelig5", 
+        "homepage": ""
+    }
+},
+{
+    "pk": 5, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true,
+		"is_private":true,
+        "description": "", 
+        "github_id": 21401170, 
+        "created": "2014-08-19T19:58:20.934Z", 
+        "display_order": 52, 
+        "modified": "2014-08-19T20:17:15.376Z", 
+        "parent_repository": 4, 
+        "last_retrieval_time": null, 
+        "organization": 1, 
+        "github_name": "Zelig5Choice", 
+        "homepage": ""
+    }
+},
+{
+    "pk": 6, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true,
+		"is_private":true,
+        "description": "Statistical software for everyone", 
+        "github_id": 1022749, 
+        "created": "2014-08-19T19:59:07.505Z", 
+        "display_order": 54, 
+        "modified": "2014-08-19T19:59:33.333Z", 
+        "parent_repository": 4, 
+        "last_retrieval_time": null, 
+        "organization": 1, 
+        "github_name": "Zelig", 
+        "homepage": "http://projects.iq.harvard.edu/zelig"
     }
 }
 ]

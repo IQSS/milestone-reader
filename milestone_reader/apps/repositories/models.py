@@ -34,14 +34,23 @@ class Repository(TimeStampedModel):
     github_id = models.IntegerField()
 
     is_visible = models.BooleanField(default=True)
+    is_private = models.BooleanField(default=False, help_text='Will mark as private in list')
 
     display_order = models.IntegerField(default=10)
+    parent_repository = models.ForeignKey('self', related_name='parent_repo', null=True, blank=True)
 
     description = models.TextField(blank=True, help_text='auto-filled')
     homepage = models.URLField(blank=True, help_text='auto-filled')
     
     last_retrieval_time = models.DateTimeField(blank=True, null=True)
-    
+
+    def save(self, *args, **kwargs):
+        # You cannot be your own parent
+        if self.parent_repository and self.parent_repository == self:
+            self.parent_repository = None
+
+        super(Repository, self).save(*args, **kwargs)
+
     def __unicode__(self):
         return self.github_name
         

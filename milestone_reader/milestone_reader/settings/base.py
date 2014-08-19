@@ -2,7 +2,7 @@
 
 import json
 import os
-from os.path import abspath, basename, dirname, join, normpath, isdir
+from os.path import abspath, basename, dirname, join, normpath, isdir, isfile
 from sys import path
 
 
@@ -264,6 +264,11 @@ SOUTH_TESTS_MIGRATE = False
 #               }
 #
 github_secrets_fname = join( dirname(abspath(__file__)), "github_api_secrets.json")
-github_secrets_json = json.loads(open(github_secrets_fname, 'r').read())
+if not isfile(github_secrets_fname):
+    raise ValueError('JSON file in settings does not exist: %s' % github_secrets_fname)
+try:
+    github_secrets_json = json.loads(open(github_secrets_fname, 'r').read())
+except:
+    raise ValueError("Failed to open JSON file for settings: %s" % github_secrets_fname)
 GITHUB_REPOSITORY_PASSWORD_DICT = github_secrets_json['GITHUB_API_ACCESS_TOKEN_INFO']
 ########## END GITHUB API KEY CONFIGURATION

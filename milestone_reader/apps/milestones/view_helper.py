@@ -99,6 +99,7 @@ class MilestoneMonthOrganizer:
             # create single row for the current month
             for repo in repos:
                 msg('-- repo: %s' % repo)
+
                 repo_milestone_months_organizer = self.repo_lookups.get(repo, None)
                 if repo_milestone_months_organizer is None:
                     msg('   no organizer for this repo (wrong!)')
@@ -127,11 +128,16 @@ class MilestoneMonthOrganizer:
             if not type(ms) is Milestone:
                 raise TypeError('ms is not a Milestone')
             cnt += 1
-            repo_milestone_organizer = self.repo_lookups.get(ms.repository, None)
+            if ms.repository.parent_repository:
+                main_ms_repo = ms.repository.parent_repository
+            else:
+                main_ms_repo = ms.repository
+
+            repo_milestone_organizer = self.repo_lookups.get(main_ms_repo, None)
             if repo_milestone_organizer is None:
-                repo_milestone_organizer = RepoMilestoneMonthsOrganizer(ms.repository)
+                repo_milestone_organizer = RepoMilestoneMonthsOrganizer(main_ms_repo)
             repo_milestone_organizer.add_milestone(ms)
-            self.repo_lookups[ms.repository] = repo_milestone_organizer
+            self.repo_lookups[main_ms_repo] = repo_milestone_organizer
 
             fmt_month = RepoMilestoneMonthsOrganizer.get_milestone_month(ms)
             if not fmt_month in self.month_list:
