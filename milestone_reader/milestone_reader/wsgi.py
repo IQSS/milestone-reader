@@ -16,7 +16,7 @@ framework.
 import os
 from os.path import abspath, dirname
 from sys import path
-
+import os, sys
 sys.stdout = sys.stderr     # send print statements to the apache logs
 
 SITE_ROOT = dirname(dirname(abspath(__file__)))
