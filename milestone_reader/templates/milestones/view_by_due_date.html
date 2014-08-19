@@ -40,11 +40,11 @@
         {% endifchanged %}
         <td>
             <b><a href="{{ ms.get_view_open_issues_url }}">{{ ms.title }}</a></b>
-             {% if ms.markdown_description %}
-                    <br />{{ ms.markdown_description|safe }}
-                {% else %}{% if ms.description %}
-                        <br />{{ ms.description }}
-                {% endif %}{% endif %}
+            {% if ms.markdown_description %}
+                <br />{{ ms.markdown_description|safe }}
+            {% else %}{% if ms.description %}
+                    <br />{{ ms.description }}
+            {% endif %}{% endif %}
                 <b>open issues:</b> <a href="{{ ms.get_view_open_issues_url }}">{{ ms.open_issues }}</a>
                 <br /><b>closed issues:</b> <a href="{{ ms.get_view_closed_issues_url }}">{{ ms.closed_issues }}</a>
             
