@@ -33,7 +33,7 @@
                         {% else %}
                          <span class="label label-info">no due date</span>
                         {% endif %}
-                        <br /><a href="{{ ms. }}" xclass="btn btn-info btn-sm">{{ ms.title }}</a>
+                        <br /><a href="{{ ms.get_view_open_issues_url }}" xclass="btn btn-info btn-sm">{{ ms.title }}</a>
                         {% if ms.markdown_description %}
                             <br />{{ ms.markdown_description|safe }}
                         {% else %}{% if ms.description %}
