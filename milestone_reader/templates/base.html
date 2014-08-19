@@ -38,7 +38,13 @@
       <h3>{{ page_title }}</h3>
 
       {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
+      <div class="well">
+          Sample Milestone Views
+        <ul>
+            <li><a href="{% url 'view_by_due_date' %}">by Due Date</a></li>
+            <li><a href="{% url 'view_by_columns' %}">Multiple columns</a></li>
+        </ul>
+      </div>
       {% endblock %}
 
     </div> <!-- /container -->
