@@ -2,10 +2,13 @@
 
 from __future__ import absolute_import
 
-from os.path import join, normpath
-
+from os.path import join, normpath, dirname
+import os
 from .base import *
 
+TEST_SETUP_DIR = normpath(join(dirname(dirname(DJANGO_ROOT)), 'test_setup'))
+if not isdir(TEST_SETUP_DIR):
+    os.makedirs(TEST_SETUP_DIR)
 
 ########## DEBUG CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug

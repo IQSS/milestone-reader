@@ -17,6 +17,8 @@ import os
 from os.path import abspath, dirname
 from sys import path
 
+sys.stdout = sys.stderr     # send print statements to the apache logs
+
 SITE_ROOT = dirname(dirname(abspath(__file__)))
 path.append(SITE_ROOT)
 
@@ -24,6 +26,12 @@ path.append(SITE_ROOT)
 # if running multiple sites in the same mod_wsgi process. To fix this, use
 # mod_wsgi daemon mode with each site in its own daemon process, or use
 # os.environ["DJANGO_SETTINGS_MODULE"] = "jajaja.settings"
+prod_paths = ['/home/ubuntu/code/milestone-reader/'\
+    , '/home/ubuntu/code/milestone-reader/milestone_reader']
+
+for p in prod_paths:
+    if os.path.isdir(p): sys.path.append(p)
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "milestone_reader.settings.production")
 
 # This application object is used by any WSGI server configured to use this
