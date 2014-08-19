@@ -9,7 +9,7 @@ if __name__=='__main__':
     
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "milestone_reader.settings.production")
 
-from from apps.milestones.milestone_retriever import MilestoneRetriever
+from apps.milestones.milestone_retriever import MilestoneRetriever
 
 if __name__=='__main__':
     ms = MilestoneRetriever()
