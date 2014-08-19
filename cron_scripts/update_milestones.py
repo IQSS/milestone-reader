@@ -1,9 +1,11 @@
-import sys
-
+import os, sys
+from os.path import dirname, join, abspath
 if __name__=='__main__':
-    paths = """/home/ubuntu/code/milestone-reader/milestone_reader
-/home/ubuntu/code/milestone-reader/milestone_reader/milestone_reader
-/home/ubuntu/.virtualenvs/milestones/lib/python2.7/site-packages""".split()
+    PROJECT_ROOT = dirname(dirname(abspath(__file__)))
+    paths = [ join(PROJECT_ROOT, 'milestone_reader')\
+            , join(PROJECT_ROOT, 'milestone_reader', 'milestone_reader')\
+            , '/home/ubuntu/.virtualenvs/milestones/lib/python2.7/site-packages'\
+            ]
     for p in paths:
         sys.path.append(p)
     
