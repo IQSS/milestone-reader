@@ -51,7 +51,9 @@ def view_by_due_date(request, repo_name=None):
 
     if repo_name:
         filter_params['repository__github_name'] = repo_name
-
+    else:
+        repo_name = None
+        
     milestones = Milestone.objects.select_related('repository', 'repository__organization'\
                                 ).filter(**filter_params\
                                 ).order_by('due_on')
@@ -62,7 +64,9 @@ def view_by_due_date(request, repo_name=None):
     d['milestones'] = milestones
     d['milestone_count'] = milestones.count()
     d['chosen_repository'] = repo_name
-    
+    if repo_name is None:
+       d['ALL_REPOS'] = True
+        
     return render_to_response('milestones/view_by_due_date.html'\
                               , d\
                               , context_instance=RequestContext(request))

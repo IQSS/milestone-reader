@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 <!-- START: CONTENT -->{% block content %}
 
-<a href="{% url 'view_by_due_date' %}">all</a>
+{% if ALL_REPOS %}
+    <b>all</b>
+{% else %}
+    <a href="{% url 'view_by_due_date' %}">all</a>
+{% endif %}
 {% for r in repos %}
     {% if r.github_name == chosen_repository %}
     &nbsp;|&nbsp; <b>{{ r.github_name }}</b>
