@@ -71,9 +71,10 @@ class MilestoneRetriever:
                 ms.markdown_description = r.text
                 ms.save()
                 continue
+            # This call failed, do something!
+            # Log it, notify user, etc.
             print r.status_code
             print r.text
-            break
     
     def retrieve_milestones(self):
         """Iterate through visible repositories and retrieve milestones"""
