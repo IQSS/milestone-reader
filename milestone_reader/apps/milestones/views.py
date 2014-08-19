@@ -32,6 +32,7 @@ def view_by_columns(request):
     #return HttpResponse('ok')
     d = {}
 
+    d['page_title'] = 'Open Milestones'
     d['sorted_repos'] = mmo.get_sorted_repos()
     d['organized_months'] = mmo.get_organized_months()
     d['NO_DUE_DATE'] = RepoMilestoneMonthsOrganizer.NO_DUE_DATE
@@ -56,8 +57,8 @@ def view_by_due_date(request, repo_name=None):
                                 ).order_by('due_on')
                                 
     d = {}
-    d['repos'] = Repository.objects.select_related('organization').filter(is_visible=True)
     d['page_title'] = 'Open Milestones'
+    d['repos'] = Repository.objects.select_related('organization').filter(is_visible=True)
     d['milestones'] = milestones
     d['milestone_count'] = milestones.count()
     d['chosen_repository'] = repo_name
