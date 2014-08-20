@@ -23,17 +23,6 @@
 
 
 {% for ms in milestones %}
-    {% if ms.repository.parent_repository %}
-       <div class="well well-sm" xstyle="background-color:#edf3fe;">
-    {% else %}
-		<div class="well well-sm" xstyle="background-color:#f5f5f5;">
-	{% endif %}
-        {% include "milestones/ms_detail_duedate-private.html" %}
-
-        <h4><a href="{{ ms.get_view_open_issues_url }}" xclass="btn btn-info btn-sm">{{ ms.title }}</a></h4>
-
         {% include "milestones/milestone_description.html" %}
-
-       </div>
 {% endfor %}
 <!-- END: CONTENT -->{% endblock  %}

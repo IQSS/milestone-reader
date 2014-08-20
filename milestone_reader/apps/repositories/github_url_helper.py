@@ -3,7 +3,14 @@ GITHUB_VIEW_URL_BASE = 'https://github.com'
 GITHUB_API_URL_BASE = 'https://api.github.com'
 def urljoin(*parts):
     return "/".join(map(lambda x: str(x).rstrip('/'), parts))
-    
+
+
+def get_view_repository_milestones_url(repo):
+    if not repo.__class__.__name__=='Repository':
+        return None
+
+    return urljoin(get_github_view_url(repo), 'milestones')
+
 def get_github_view_url(github_obj, is_closed=False):
     if github_obj is None:
         return None

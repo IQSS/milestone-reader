@@ -1,36 +1,41 @@
-
-{% if ms.due_on %}
-    {% if SINGLE_COLUMN %}
-    <!-- due date w/ year --><span class="label label-info">{{ ms.due_on|date:"M j, Y" }}</span>
+ {% if ms.repository.parent_repository %}
+   <div class="well well-sm" style="background-color:#edf3fe;">
+{% else %}
+    <div class="well well-sm" style="background-color:#f5f5f5;">
+{% endif %}
+    {% if ms.due_on %}
+        {% if SINGLE_COLUMN %}
+        <!-- due date w/ year --><span class="label label-default"><a href="{{ ms.get_view_open_issues_url }}" style="color:#fff;"><span class="glyphicon glyphicon-calendar"></span>&nbsp;{{ ms.due_on|date:"M j Y" }}</a></span>
+        {% else %}
+        <!-- due date --><span class="label label-default"><a href="{{ ms.get_view_open_issues_url }}" style="color:#fff;"><span class="glyphicon glyphicon-calendar"></span>&nbsp;{{ ms.due_on|date:"M j" }}</a></span>
+        {% endif %}
     {% else %}
-    <!-- due date --><span class="label label-info">{{ ms.due_on|date:"M j" }}</span>
+        <!-- no due date --><span class="label label-info">no due date</span>
     {% endif %}
-{% else %}
-    <!-- no due date --><span class="label label-info">no due date</span>
-{% endif %}
 
-{% if ms.repository.parent_repository %}{% endif %}
-<!-- repository label --><span class="label label-success"><a href="{{ ms.repository.get_github_view_url }}" style="color:#fff;">{{ ms.repository }}</a></span>
+    {% if ms.repository.parent_repository %}{% endif %}
+    <!-- repository label --><span class="label label-success"><a href="{{ ms.repository.get_github_view_milestones_url }}" style="color:#fff;">{{ ms.repository }}</a></span>
 
-{% if ms.repository.is_private %}
-<!-- private label --><span class="label label-default">Private</span>
-{% endif %}
+    {% if ms.repository.is_private %}
+    <!-- private label --><span class="label label-warning"><a href="{{ ms.repository.get_github_view_milestones_url }}" style="color:#fff;">Private</a></span>
+    {% endif %}
 
-<!-- title -->
-{% if SINGLE_COLUMN %}
-    <h4><a href="{{ ms.get_view_open_issues_url }}">{{ ms.title }}</a></h4>
-{% else %}
-    <h5><a href="{{ ms.get_view_open_issues_url }}">{{ ms.title }}</a></h5>
-{% endif %}
+    <!-- title -->
+    {% if SINGLE_COLUMN %}
+        <h4><a href="{{ ms.get_view_open_issues_url }}">{{ ms.title }}</a></h4>
+    {% else %}
+        <h5><a href="{{ ms.get_view_open_issues_url }}">{{ ms.title }}</a></h5>
+    {% endif %}
 
-<hr />
+    <hr />
 
-<!-- description -->
-{% if ms.markdown_description %}
-    {{ ms.markdown_description|safe }}
-{% else %}{% if ms.description %}
-    {{ ms.description|linebreaksbr }}
-{% endif %}{% endif %}
+    <!-- description -->
+    {% if ms.markdown_description %}
+        {{ ms.markdown_description|safe }}
+    {% else %}{% if ms.description %}
+        {{ ms.description|linebreaksbr }}
+    {% endif %}{% endif %}
 
-open issues: <a href="{{ ms.get_view_open_issues_url }}">{{ ms.open_issues }}</a><br />
-closed issues: <a href="{{ ms.get_view_closed_issues_url }}">{{ ms.closed_issues }}</a>
+    open issues: <a href="{{ ms.get_view_open_issues_url }}">{{ ms.open_issues }}</a><br />
+    closed issues: <a href="{{ ms.get_view_closed_issues_url }}">{{ ms.closed_issues }}</a>
+</div>

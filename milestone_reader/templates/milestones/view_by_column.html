@@ -28,21 +28,8 @@
                     </div>
                 </td>
             {% endif %}
-            <td width="20%">{% for ms in month_milestone_info.milestones %}
-                   {% if ms.repository.parent_repository %}
-                     <div class="well well-sm" style="background-color:#edf3fe;">
-                    {% else %}
-                    <div class="well well-sm">
-
-                    {% endif %}
-                    {% include "milestones/ms_detail_duedate-private.html" %}
-
-                    <br /><a href="{{ ms.get_view_open_issues_url }}">{{ ms.title }}</a>
-
-                    {% include "milestones/milestone_description.html" %}
-
-                </div>
-
+            <td width="17%">{% for ms in month_milestone_info.milestones %}
+                   {% include "milestones/milestone_description.html" %}
 
                 {% empty %}
                    &nbsp;

@@ -81,6 +81,8 @@ def view_single_repo_column(request, repo_name):
 
     d['page_title'] = 'IQSS Data Science: %s Milestones' % chosen_repo
     d['page_title_link'] = chosen_repo.get_github_view_url()
+    #d['page_title_link'] = chosen_repo.get_github_view_milestones_url()
+
     d['chosen_repository'] = chosen_repo
     d['milestones'] = milestones
     d['milestone_count'] = milestones.count()
