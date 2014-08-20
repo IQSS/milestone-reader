@@ -62,6 +62,7 @@ class MilestoneMonthOrganizer:
     """Organize milestones by month and repository"""
 
     def __init__(self, milestones):
+        self.current_date = datetime.now()
         self.repo_lookups = {}      # { repository : RepoMilestoneMonthsOrganizer }
         self.month_list = []
 
@@ -128,6 +129,10 @@ class MilestoneMonthOrganizer:
             if not type(ms) is Milestone:
                 raise TypeError('ms is not a Milestone')
             cnt += 1
+
+            #if ms.due_on:
+            #    #ms.days_remaining = self.current_date  - ms.due_on
+
             if ms.repository.parent_repository:
                 main_ms_repo = ms.repository.parent_repository
             else:

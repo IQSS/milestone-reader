@@ -81,7 +81,8 @@ class MilestoneRetriever:
         
         for repo in Repository.objects.filter(is_visible=True):
             self.get_repository_milestones(repo)
-            
+            repo.last_retrieval_time = self.retrieval_time
+            repo.save()
             
     def get_api_key(self, repo):
         """Convenience method for retrieving API keys from settings dict: GITHUB_REPOSITORY_PASSWORD_DICT"""
