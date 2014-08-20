@@ -7,7 +7,7 @@ from django.template import RequestContext
 from django.db.models import Q
 
 from milestone_reader.utils.msg_util import *
-
+from datetime import datetime
 from apps.repositories.models import Repository
 from apps.milestones.models import Milestone
 
@@ -87,7 +87,13 @@ def view_single_repo_column(request, repo_name):
         # This is a child repository, only show its milestones
         milestones = milestones.filter(repository=chosen_repo)
 
-    milestones_queryset = milestones.order_by('due_on')
+    milestones_list = list(milestones.order_by('due_on'))
+
+    current_date = datetime.now()
+    for ms in milestones_list:
+        if ms.due_on:
+            ms.days_remaining = ms.due_on.replace(tzinfo=None) - current_date#.date()
+
 
     open_closed_cnts = milestones.values('open_issues', 'closed_issues')
     num_open_issues = sum(x['open_issues'] for x in open_closed_cnts)
@@ -102,8 +108,8 @@ def view_single_repo_column(request, repo_name):
     #d['page_title_link'] = chosen_repo.get_github_view_milestones_url()
 
     d['chosen_repository'] = chosen_repo
-    d['milestones'] = milestones_queryset
-    d['milestone_count'] = milestones_queryset.count()
+    d['milestone_count'] = len(milestones_list)#.count()
+    d['milestones'] = milestones_list
 
     d['num_open_issues'] = num_open_issues
     d['num_closed_issues'] = num_closed_issues

@@ -130,8 +130,8 @@ class MilestoneMonthOrganizer:
                 raise TypeError('ms is not a Milestone')
             cnt += 1
 
-            #if ms.due_on:
-            #    #ms.days_remaining = self.current_date  - ms.due_on
+            if ms.due_on:
+                ms.days_remaining = ms.due_on.replace(tzinfo=None) - self.current_date#.date()
 
             if ms.repository.parent_repository:
                 main_ms_repo = ms.repository.parent_repository
