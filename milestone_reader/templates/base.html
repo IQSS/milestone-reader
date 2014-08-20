@@ -35,14 +35,18 @@
 
     <div class="container">
 
-      <h3>{{ page_title }}</h3>
+        {% if page_title_link %}
+          <h3><a href="{{ page_title_link }}">{{ page_title }}</a></h3>
+        {% else %}
+          <h3><a href="http://datascience.iq.harvard.edu">{{ page_title }}</a></h3>
+        {% endif %}
 
       {% block content %}
       <div class="well">
           Sample Milestone View
         <ul>
-            <li><a href="{% url 'view_by_due_date' %}">by Due Date</a></li>
-            <li><a href="{% url 'view_by_columns' %}">Multiple columns</a></li>
+           {# <li><a href="{% url 'view_by_due_date' %}">by Due Date</a></li>#}
+            <li><a href="{% url 'view_by_columns' %}">Milestone Roadmap</a></li>
         </ul>
       </div>
       {% endblock %}

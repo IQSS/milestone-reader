@@ -4,12 +4,21 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.template import RequestContext
 
+from django.db.models import Q
+
 from milestone_reader.utils.msg_util import *
 
 from apps.repositories.models import Repository
 from apps.milestones.models import Milestone
 
 from apps.milestones.view_helper import MilestoneMonthOrganizer, RepoMilestoneMonthsOrganizer
+
+
+def get_basic_milestone_query():
+    return Milestone.objects.select_related('repository', 'repository__organization', 'parent_repository'\
+                                ).filter(is_open=True\
+                                       , repository__is_visible=True\
+                                )
 
 def get_basic_milestone_params():
     return dict(is_open=True\
@@ -21,11 +30,7 @@ def view_by_columns(request):
     :param request:
     :return:
     """
-    filter_params = get_basic_milestone_params()
-
-    milestones = Milestone.objects.select_related('repository', 'repository__organization', 'parent_repository'\
-                                ).filter(**filter_params\
-                                ).order_by('due_on')
+    milestones = get_basic_milestone_query().order_by('due_on')
 
     mmo = MilestoneMonthOrganizer(milestones)
     #mmo.show()
@@ -43,23 +48,68 @@ def view_by_columns(request):
                               , context_instance=RequestContext(request))
 
 
+def view_single_repo_column(request, repo_name):
+    """
+    Show milestones from this repository and any child repositories (direct children, e.g. 1-level)
+    :param request:
+    :param repo_name:
+    :return:
+    """
+    milestones = get_basic_milestone_query()#.order_by('due_on')
+
+    try:
+        chosen_repo = Repository.objects.select_related('parent_repository').get(is_visible=True, github_name=repo_name)
+    except Repository.DoesNotExist:
+        raise Http404("Repository not found: %s" % repo_name)
+
+    # Repository has no parent -- so it is a parent
+    # Pull milestones:
+    #   - from this repository  (e.g. dataverse)
+    #   - any repositories that have this repo as a parent  (e.g. geoconnect)
+    #
+    if not chosen_repo.parent_repository:
+        milestones = milestones.filter(Q(repository=chosen_repo)|Q(repository__parent_repository=chosen_repo))
+    else:
+        # This is a child repository, only show its milestones
+        milestones = milestones.filter(repository=chosen_repo)
+
+    milestones = milestones.order_by('due_on')
+
+    d = {}
+
+    d['repos'] = Repository.objects.filter(parent_repository__isnull=True).filter(is_visible=True)
+
+    d['page_title'] = 'IQSS Data Science: %s Milestones' % chosen_repo
+    d['page_title_link'] = chosen_repo.get_github_view_url()
+    d['chosen_repository'] = chosen_repo
+    d['milestones'] = milestones
+    d['milestone_count'] = milestones.count()
+    d['SINGLE_COLUMN'] = True
+    print(d)
+    return render_to_response('milestones/view_single_repo_column2.html'\
+                              , d\
+                              , context_instance=RequestContext(request))
+
+
+
+
 def view_by_due_date(request, repo_name=None):
     """Sample view/template
     http://127.0.0.1:8000/milestones/by-due-date/
     """
-    filter_params = get_basic_milestone_params()
+    milestones = get_basic_milestone_query()
 
     if repo_name:
-        filter_params['repository__github_name'] = repo_name
+        milestones = milestones.filter(repository__github_name=repo_name)
     else:
         repo_name = None
         
-    milestones = Milestone.objects.select_related('repository', 'repository__organization'\
-                                ).filter(**filter_params\
-                                ).order_by('due_on')
+    milestones = milestones.order_by('due_on')
                                 
     d = {}
     d['page_title'] = 'IQSS Data Science Projects: Milestones'
+    d['page_title_link'] = 'http://datascience.iq.harvard.edu'
+
     d['repos'] = Repository.objects.select_related('organization').filter(is_visible=True)
     d['milestones'] = milestones
     d['milestone_count'] = milestones.count()

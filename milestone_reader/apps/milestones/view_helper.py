@@ -58,13 +58,13 @@ class MonthMilestones:
         self.month = month
         self.milestones = milestones
 
-
 class MilestoneMonthOrganizer:
     """Organize milestones by month and repository"""
 
     def __init__(self, milestones):
         self.repo_lookups = {}      # { repository : RepoMilestoneMonthsOrganizer }
         self.month_list = []
+
         #self.sorted_repos = []
         self.organize_milestones(milestones)
 

@@ -7,6 +7,8 @@ urlpatterns = patterns('apps.milestones.views',
     
     url(r'^by-due-date/$', 'view_by_due_date', name="view_by_due_date"),
 
-    url(r'^by-columns/$', 'view_by_columns', name="view_by_columns"),
+    url(r'^milestone-roadmap/$', 'view_by_columns', name="view_by_columns"),
+
+    url(r'^milestone-roadmap/(?P<repo_name>(\-|_|\w){1,120})/$', 'view_single_repo_column', name="view_single_repo_column"),
 
 )

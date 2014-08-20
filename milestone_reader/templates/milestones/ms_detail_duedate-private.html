@@ -1,0 +1,15 @@
+{% if ms.due_on %}
+    {% if single_column %}
+    <span class="label label-info">{{ ms.due_on|date:"M j, Y" }}</span>
+    {% else %}
+    <span class="label label-info">{{ ms.due_on|date:"M j" }}</span>
+    {% endif %}
+{% else %}
+    <span class="label label-info">no due date</span>
+{% endif %}
+{% if ms.repository.parent_repository %}{% endif %}
+        <span class="label label-success"><a href="{{ ms.repository.get_github_view_url }}" style="color:#fff;">{{ ms.repository }}</a></span>
+
+{% if ms.repository.is_private %}
+        <span class="label label-default">Private</span>
+{% endif %}

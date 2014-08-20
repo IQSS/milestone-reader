@@ -5,9 +5,11 @@
 <table class="table xtable-bordered table-condensed">
     <thead>
         <tr>
-            <th>Month</th>
+            <th>&nbsp;</th>
             {% for repo in sorted_repos %}
-            <th><a href="{{ repo.get_github_view_url }}">{{ repo }}</a></th>
+            {#<th><a href="{{ repo.get_github_view_url }}">{{ repo }}</a></td>#}
+             <th><a class="btn btn-primary btn-default" href="{% url 'view_single_repo_column' repo.github_name %}">{{ repo }}</a></th>
+            {#<th><a href="{% url 'view_single_repo_column' repo.github_name %}">{{ repo }}</a></th>#}
             {% endfor %}
         </tr>
     </thead>
@@ -20,7 +22,8 @@
                         {% if month_milestone_info.month == NO_DUE_DATE %}
                         <span class="label label-primary">no due date</span>
                     {% else %}
-                        <span class="label label-primary">{{ month_milestone_info.month|date:"M Y" }}</span>
+                        {#<span class="label label-primary">{{ month_milestone_info.month|date:"M Y" }}</span>#}
+                        <div class="alert alert-info" role="alert">{{ month_milestone_info.month|date:"M Y" }}</div>
                     {% endif %}
                     </div>
                 </td>
@@ -32,26 +35,13 @@
                     <div class="well well-sm">
 
                     {% endif %}
-                        {% if ms.due_on %}
-                         <span class="label label-info">{{ ms.due_on|date:"M j" }}</span>
-                            {% if ms.repository.parent_repository %}
-                                <span class="label label-success">{{ ms.repository }}</span>
-                            {% endif %}
-                        {% else %}
-                         <span class="label label-info">no due date</span>
-                        {% endif %}
-                       <br /><a href="{{ ms.get_view_open_issues_url }}" xclass="btn btn-info btn-sm">{{ ms.title }}</a>
+                    {% include "milestones/ms_detail_duedate-private.html" %}
 
-                        <hr style="background-color:#006699;" />
-                        {% if ms.markdown_description %}
-                            {{ ms.markdown_description|safe }}
-                        {% else %}{% if ms.description %}
-                            {{ ms.description|linebreaksbr }}
-                        {% endif %}{% endif %}
-                open issues: <a href="{{ ms.get_view_open_issues_url }}">{{ ms.open_issues }}</a>
-                <br />closed issues: <a href="{{ ms.get_view_closed_issues_url }}">{{ ms.closed_issues }}</a>
-                            
-                    </div>
+                    <br /><a href="{{ ms.get_view_open_issues_url }}">{{ ms.title }}</a>
+
+                    {% include "milestones/milestone_description.html" %}
+
+                </div>
 
 
                 {% empty %}
