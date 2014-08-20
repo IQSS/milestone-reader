@@ -61,3 +61,4 @@ docs/_build/
 
 # Vagrant
 .vagrant
+milestone_reader/milestone_reader/settings/github_api_secrets.json.local
