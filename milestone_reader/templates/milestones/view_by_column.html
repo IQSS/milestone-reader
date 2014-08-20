@@ -3,6 +3,8 @@
 <p>
     <b>{{ milestone_count }}</b> open milestone{{ milestone_count|pluralize }} found.
         Issues: <b>{{ num_open_issues }}</b> open.  <b>{{ num_closed_issues }}</b> closed.
+        {% if last_retrieval_time %}<br /><small><i>updated: {{ last_retrieval_time }}</i></small>{% endif %}
+
 </p>
 <table class="table xtable-bordered table-condensed">
     <thead>

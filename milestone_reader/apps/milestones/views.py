@@ -39,10 +39,17 @@ def view_by_columns(request):
     mmo = MilestoneMonthOrganizer(milestones)
     #mmo.show()
     #return HttpResponse('ok')
+    sorted_repos = mmo.get_sorted_repos()
+    if sorted_repos and len(sorted_repos) > 0:
+        last_retrieval_time = sorted_repos[0].last_retrieval_time
+    else:
+        last_retrieval_time = None
+
     d = {}
 
     d['page_title'] = 'IQSS Data Science Projects: Milestones'
-    d['sorted_repos'] = mmo.get_sorted_repos()
+    d['last_retrieval_time'] = last_retrieval_time
+    d['sorted_repos'] = sorted_repos
     d['organized_months'] = mmo.get_organized_months()
     d['NO_DUE_DATE'] = RepoMilestoneMonthsOrganizer.NO_DUE_DATE
     d['milestone_count'] = milestones.count()
