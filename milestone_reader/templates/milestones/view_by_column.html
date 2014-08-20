@@ -36,7 +36,11 @@
                    {% include "milestones/milestone_description.html" %}
 
                 {% empty %}
-                   &nbsp;
+                    {# --- NO REPO MILESTONES FOR THIS MONTH --- #}
+                      <div class="well well-sm" style="background-color:#fff;color:#ccc;">
+                          <small><i>No milestones this month</i></small>
+                      </div>
+
                 {% endfor %}
             </td>
         {% endfor %}
