@@ -15,108 +15,162 @@
     "pk": 1, 
     "model": "repositories.repository", 
     "fields": {
-        "is_visible": true,
-		"is_private":true,
+        "is_visible": true, 
         "description": "drop table repositories_repository;", 
         "github_id": 11134522, 
         "created": "2014-08-17T19:09:18.653Z", 
-        "display_order": 20, 
-        "modified": "2014-08-19T20:17:01.629Z", 
+        "display_order": 30, 
+        "modified": "2014-08-20T02:48:09.109Z", 
         "parent_repository": null, 
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "TwoRavens", 
-        "homepage": ""
+        "homepage": "", 
+        "is_private": false
     }
 },
 {
     "pk": 2, 
     "model": "repositories.repository", 
     "fields": {
-        "is_visible": true,
-		"is_private":true,
+        "is_visible": true, 
         "description": "The next generation code base, distinct from https://github.com/IQSS/dvn", 
         "github_id": 14051004, 
         "created": "2014-08-17T19:10:56.066Z", 
-        "display_order": 10, 
-        "modified": "2014-08-17T19:10:56.080Z", 
+        "display_order": 20, 
+        "modified": "2014-08-20T02:48:09.074Z", 
         "parent_repository": null, 
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "dataverse", 
-        "homepage": ""
+        "homepage": "", 
+        "is_private": false
     }
 },
 {
     "pk": 3, 
     "model": "repositories.repository", 
     "fields": {
-        "is_visible": true,
-		"is_private":true,
+        "is_visible": true, 
         "description": "BARI project: Connecting the Dataverse and WorldMap", 
         "github_id": 19804703, 
         "created": "2014-08-17T19:11:30.418Z", 
-        "display_order": 30, 
-        "modified": "2014-08-17T19:11:42.607Z", 
-        "parent_repository": null, 
+        "display_order": 22, 
+        "modified": "2014-08-20T02:48:09.093Z", 
+        "parent_repository": 2, 
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "geoconnect", 
-        "homepage": ""
+        "homepage": "", 
+        "is_private": false
     }
 },
 {
     "pk": 4, 
     "model": "repositories.repository", 
     "fields": {
-        "is_visible": true,
-		"is_private":true,
+        "is_visible": true, 
         "description": "Zelig5", 
         "github_id": 14958190, 
         "created": "2014-08-19T19:57:07.312Z", 
-        "display_order": 50, 
-        "modified": "2014-08-19T19:59:33.292Z", 
+        "display_order": 10, 
+        "modified": "2014-08-20T02:48:09.014Z", 
         "parent_repository": null, 
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "Zelig5", 
-        "homepage": ""
+        "homepage": "", 
+        "is_private": false
     }
 },
 {
     "pk": 5, 
     "model": "repositories.repository", 
     "fields": {
-        "is_visible": true,
-		"is_private":true,
+        "is_visible": true, 
         "description": "", 
         "github_id": 21401170, 
         "created": "2014-08-19T19:58:20.934Z", 
-        "display_order": 52, 
-        "modified": "2014-08-19T20:17:15.376Z", 
+        "display_order": 12, 
+        "modified": "2014-08-20T02:48:09.039Z", 
         "parent_repository": 4, 
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "Zelig5Choice", 
-        "homepage": ""
+        "homepage": "", 
+        "is_private": false
     }
 },
 {
     "pk": 6, 
     "model": "repositories.repository", 
     "fields": {
-        "is_visible": true,
-		"is_private":true,
+        "is_visible": true, 
         "description": "Statistical software for everyone", 
         "github_id": 1022749, 
         "created": "2014-08-19T19:59:07.505Z", 
-        "display_order": 54, 
-        "modified": "2014-08-19T19:59:33.333Z", 
+        "display_order": 14, 
+        "modified": "2014-08-20T02:48:09.058Z", 
         "parent_repository": 4, 
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "Zelig", 
-        "homepage": "http://projects.iq.harvard.edu/zelig"
+        "homepage": "http://projects.iq.harvard.edu/zelig", 
+        "is_private": false
+    }
+},
+{
+    "pk": 7, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "description": "A system to tag the how private datasets are, and how they should be handled", 
+        "github_id": 12300135, 
+        "created": "2014-08-19T21:21:55.577Z", 
+        "display_order": 40, 
+        "modified": "2014-08-19T21:24:03.636Z", 
+        "parent_repository": null, 
+        "last_retrieval_time": null, 
+        "organization": 1, 
+        "github_name": "DataTags", 
+        "homepage": "", 
+        "is_private": false
+    }
+},
+{
+    "pk": 8, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "description": "Consilience", 
+        "github_id": 45, 
+        "created": "2014-08-19T22:03:41.349Z", 
+        "display_order": 100, 
+        "modified": "2014-08-19T22:08:14.811Z", 
+        "parent_repository": null, 
+        "last_retrieval_time": null, 
+        "organization": 1, 
+        "github_name": "consilience", 
+        "homepage": "", 
+        "is_private": true
+    }
+},
+{
+    "pk": 9, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "description": "", 
+        "github_id": 34, 
+        "created": "2014-08-19T22:11:05.014Z", 
+        "display_order": 10, 
+        "modified": "2014-08-19T22:11:05.033Z", 
+        "parent_repository": 1, 
+        "last_retrieval_time": null, 
+        "organization": 1, 
+        "github_name": "PhthisisRavens", 
+        "homepage": "", 
+        "is_private": true
     }
 }
 ]
