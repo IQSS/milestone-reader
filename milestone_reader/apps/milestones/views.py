@@ -32,6 +32,10 @@ def view_by_columns(request):
     """
     milestones = get_basic_milestone_query().order_by('due_on')
 
+    open_closed_cnts = milestones.values('open_issues', 'closed_issues')
+    num_open_issues = sum(x['open_issues'] for x in open_closed_cnts)
+    num_closed_issues = sum( x['closed_issues'] for x in open_closed_cnts)
+
     mmo = MilestoneMonthOrganizer(milestones)
     #mmo.show()
     #return HttpResponse('ok')
@@ -42,6 +46,9 @@ def view_by_columns(request):
     d['organized_months'] = mmo.get_organized_months()
     d['NO_DUE_DATE'] = RepoMilestoneMonthsOrganizer.NO_DUE_DATE
     d['milestone_count'] = milestones.count()
+    d['num_open_issues'] = num_open_issues
+    d['num_closed_issues'] = num_closed_issues
+
     print(d)
     return render_to_response('milestones/view_by_column.html'\
                               , d\
@@ -73,7 +80,11 @@ def view_single_repo_column(request, repo_name):
         # This is a child repository, only show its milestones
         milestones = milestones.filter(repository=chosen_repo)
 
-    milestones = milestones.order_by('due_on')
+    milestones_queryset = milestones.order_by('due_on')
+
+    open_closed_cnts = milestones.values('open_issues', 'closed_issues')
+    num_open_issues = sum(x['open_issues'] for x in open_closed_cnts)
+    num_closed_issues = sum( x['closed_issues'] for x in open_closed_cnts)
 
     d = {}
 
@@ -84,8 +95,12 @@ def view_single_repo_column(request, repo_name):
     #d['page_title_link'] = chosen_repo.get_github_view_milestones_url()
 
     d['chosen_repository'] = chosen_repo
-    d['milestones'] = milestones
-    d['milestone_count'] = milestones.count()
+    d['milestones'] = milestones_queryset
+    d['milestone_count'] = milestones_queryset.count()
+
+    d['num_open_issues'] = num_open_issues
+    d['num_closed_issues'] = num_closed_issues
+
     d['SINGLE_COLUMN'] = True
     print(d)
     return render_to_response('milestones/view_single_repo_column2.html'\
