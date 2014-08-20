@@ -12,8 +12,9 @@ if not isdir(TEST_SETUP_DIR):
 
 ########## DEBUG CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = False
-ALLOWED_HOSTS = ('127.0.0.1', 'netdna.bootstrapcdn.com')
+DEBUG = True
+#DEBUG = False
+#ALLOWED_HOSTS = ('127.0.0.1', 'netdna.bootstrapcdn.com')
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 TEMPLATE_DEBUG = DEBUG
 ########## END DEBUG CONFIGURATION
