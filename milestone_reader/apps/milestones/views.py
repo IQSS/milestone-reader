@@ -15,7 +15,7 @@ from apps.milestones.view_helper import MilestoneMonthOrganizer, RepoMilestoneMo
 
 
 def get_basic_milestone_query():
-    return Milestone.objects.select_related('repository', 'repository__organization', 'parent_repository'\
+    return Milestone.objects.select_related('repository', 'repository__organization', 'repository__parent_repository'\
                                 ).filter(is_open=True\
                                        , repository__is_visible=True\
                                 )
@@ -58,7 +58,7 @@ def view_single_repo_column(request, repo_name):
     milestones = get_basic_milestone_query()#.order_by('due_on')
 
     try:
-        chosen_repo = Repository.objects.select_related('parent_repository').get(is_visible=True, github_name=repo_name)
+        chosen_repo = Repository.objects.select_related('organization', 'parent_repository').get(is_visible=True, github_name=repo_name)
     except Repository.DoesNotExist:
         raise Http404("Repository not found: %s" % repo_name)
 
@@ -77,7 +77,7 @@ def view_single_repo_column(request, repo_name):
 
     d = {}
 
-    d['repos'] = Repository.objects.filter(parent_repository__isnull=True).filter(is_visible=True)
+    d['repos'] = Repository.objects.select_related('organization', 'parent_repository').filter(parent_repository__isnull=True).filter(is_visible=True)
 
     d['page_title'] = 'IQSS Data Science: %s Milestones' % chosen_repo
     d['page_title_link'] = chosen_repo.get_github_view_url()
