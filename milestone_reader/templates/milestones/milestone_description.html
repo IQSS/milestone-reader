@@ -39,6 +39,12 @@
     open issues: <a href="{{ ms.get_view_open_issues_url }}">{{ ms.open_issues }}</a><br />
     closed issues: <a href="{{ ms.get_view_closed_issues_url }}">{{ ms.closed_issues }}</a>
      {% if ms.days_remaining %}
-        <br />days remaining: <b>{{ ms.days_remaining.days }}</b>
+        <br />days remaining: 
+            <b>{% if ms.days_remaining.days < 0 %}
+                overdue
+            {% else %}
+                {{ ms.days_remaining.days }}
+            {% endif %}
+            </b>
       {% endif %}
 </div>
