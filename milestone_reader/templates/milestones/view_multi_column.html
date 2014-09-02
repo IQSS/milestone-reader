@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 <!-- START: CONTENT -->{% block content %}
 <p>
-    <b>{{ milestone_count }}</b> open milestone{{ milestone_count|pluralize }} found.
+    <b>{{ milestone_count }}</b> milestone{{ milestone_count|pluralize }} found.
         Issues: <b>{{ num_open_issues }}</b> open.  <b>{{ num_closed_issues }}</b> closed.
         {% if last_retrieval_time %}<br /><small><i>updated: {{ last_retrieval_time }}</i></small>{% endif %}
 
@@ -33,7 +33,7 @@
                 </td>
             {% endif %}
             <td width="17%">{% for ms in month_milestone_info.milestones %}
-                   {% include "milestones/milestone_description.html" %}
+                   {% include "milestones/milestone_description3.html" %}
 
                 {% empty %}
                     {# --- NO REPO MILESTONES FOR THIS MONTH --- #}

@@ -15,10 +15,24 @@ from apps.milestones.view_helper import MilestoneMonthOrganizer, RepoMilestoneMo
 
 
 def get_basic_milestone_query():
+    """
+    Show all tickets from current month onwards: open and closed tickets
+    """
+    
+    current_time = datetime.today()
+    current_month = datetime(current_time.year, current_time.month, 1)
+
+    
     return Milestone.objects.select_related('repository', 'repository__organization', 'repository__parent_repository'\
-                                ).filter(is_open=True\
+                                ).filter(due_on__gte=current_month\
                                        , repository__is_visible=True\
                                 )
+    
+    # original query of only open milestones
+    #return Milestone.objects.select_related('repository', 'repository__organization', 'repository__parent_repository'\
+    #                            ).filter(is_open=True\
+    #                                   , repository__is_visible=True\
+    #                            )
 
 def get_basic_milestone_params():
     return dict(is_open=True\
@@ -56,8 +70,9 @@ def view_by_columns(request):
     d['num_open_issues'] = num_open_issues
     d['num_closed_issues'] = num_closed_issues
 
+    d['hide_description'] = True
     print(d)
-    return render_to_response('milestones/view_by_column.html'\
+    return render_to_response('milestones/view_multi_column.html'\
                               , d\
                               , context_instance=RequestContext(request))
 
@@ -116,7 +131,7 @@ def view_single_repo_column(request, repo_name):
 
     d['SINGLE_COLUMN'] = True
     print(d)
-    return render_to_response('milestones/view_single_repo_column2.html'\
+    return render_to_response('milestones/view_single_repo_column.html'\
                               , d\
                               , context_instance=RequestContext(request))
 

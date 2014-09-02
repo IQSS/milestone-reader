@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+<!-- START: CONTENT -->{% block content %}
+
+{% if ALL_REPOS %}
+	<b>all</b>
+{% else %}
+	<a href="{% url 'view_by_columns' %}">all</a>
+{% endif %}
+{% for r in repos %}
+	{% if r == chosen_repository %}
+	&nbsp;|&nbsp; <b>{{ r.github_name }}</b>
+	{% else %}
+	&nbsp;|&nbsp; <a href="{% url 'view_single_repo_column' r.github_name %}">{{ r.github_name }}</a>
+	{% endif %}
+{% endfor %}
+
+<br /><b>{{ milestone_count }}</b> open milestone{{ milestone_count|pluralize }} found.
+
+<table class="table table-condensed">
+	{% comment %}
+    <thead>
+		<tr>
+			{#<th>Due Date</th>#}
+			<th>Milestone</th>
+		</tr>
+	</thead>
+    {% endcomment %}
+
+	{% for ms in milestones %}
+	<tr>
+        {% comment %}
+		<td>
+            {% if ms.due_on %}
+                <span class="label label-info">{{ ms.due_on|date:"M j, Y" }}</span>
+            {% else %}
+                <span class="label label-info">no due date</span>
+            {% endif %}
+        </td>
+        {% endcomment %}
+
+        <td>{% if ms.repository.parent_repository %}
+                <div class="well well-sm" style="background-color:#edf3fe;">
+			{% else %}
+				<div class="well well-sm" style="background-color:#f5f5f5;">
+			{% endif %}
+                    {% if ms.due_on %}
+                <span class="label label-info">{{ ms.due_on|date:"M j, Y" }}</span>
+            {% else %}
+                <span class="label label-info">no due date</span>
+            {% endif %}
+                    {% if ms.repository.parent_repository %}
+		        		<span class="label label-success">{{ ms.repository }}</span>
+			        {% endif %}
+                    {% include "milestones/milestone_description.html" %}
+
+            </div>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="2">No milestones available.</td></tr>
+	{% endfor %}
+</table>
+
+<!-- END: CONTENT -->{% endblock  %}

@@ -46,7 +46,7 @@ class Milestone(TimeStampedModel):
     def save(self, *args, **kwargs):
         # do something...
         super(Milestone, self).save(*args, **kwargs)
-        
+
     def get_view_open_issues_url(self):
         return get_github_view_url(self)
 
