@@ -29,6 +29,7 @@ class Repository(TimeStampedModel):
     These objects will persist for a limited time (days, weeks), depending on the system demand
     """
     github_name = models.CharField(max_length=255, help_text='dataverse')
+    display_name = models.CharField(max_length=255, help_text='(if blank, will be auto-filled with github name)', blank=True)
     organization = models.ForeignKey(Organization)
 
     github_id = models.IntegerField()
@@ -49,10 +50,13 @@ class Repository(TimeStampedModel):
         if self.parent_repository and self.parent_repository == self:
             self.parent_repository = None
 
+        if not self.display_name:
+            self.display_name = self.github_name
+            
         super(Repository, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return self.github_name
+        return self.display_name
         
     class Meta:
         verbose_name_plural = 'Repositories'

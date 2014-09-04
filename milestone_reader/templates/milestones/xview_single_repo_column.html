@@ -8,9 +8,9 @@
 {% endif %}
 {% for r in repos %}
 	{% if r == chosen_repository %}
-	&nbsp;|&nbsp; <b>{{ r.github_name }}</b>
+	&nbsp;|&nbsp; <b>{{ r.display_name }}</b>
 	{% else %}
-	&nbsp;|&nbsp; <a href="{% url 'view_single_repo_column' r.github_name %}">{{ r.github_name }}</a>
+	&nbsp;|&nbsp; <a href="{% url 'view_single_repo_column' r.github_name %}">{{ r.display_name }}</a>
 	{% endif %}
 {% endfor %}
 

@@ -10,7 +10,7 @@
     {% if r.github_name == chosen_repository %}
     &nbsp;|&nbsp; <b>{{ r.github_name }}</b>
     {% else %}
-    &nbsp;|&nbsp; <a href="{% url 'view_repo_by_due_date' r.github_name %}">{{ r.github_name }}</a>
+    &nbsp;|&nbsp; <a href="{% url 'view_repo_by_due_date' r.github_name %}">{{ r.display_name }}</a>
     {% endif %}
 {% endfor %}
 
