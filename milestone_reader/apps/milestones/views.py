@@ -14,6 +14,15 @@ from apps.milestones.models import Milestone
 from apps.milestones.view_helper import MilestoneMonthOrganizer, RepoMilestoneMonthsOrganizer
 
 
+def get_issue_counts_query_base(chosen_repo=None):
+
+    # These counts are irrespective of date    
+    if chosen_repo is not None:
+        return Milestone.objects.select_related('repository').filter(repository__is_visible=True).filter(Q(repository=chosen_repo)|Q(repository__parent_repository=chosen_repo))
+    else:
+        return Milestone.objects.select_related('repository').filter(repository__is_visible=True)
+    
+    
 def get_basic_milestone_query():
     """
     Show all tickets from current month onwards: open and closed tickets
@@ -34,6 +43,7 @@ def get_basic_milestone_query():
     #                                   , repository__is_visible=True\
     #                            )
 
+
 def get_basic_milestone_params():
     return dict(is_open=True\
                 , repository__is_visible=True)
@@ -46,7 +56,7 @@ def view_by_columns(request):
     """
     milestones = get_basic_milestone_query().order_by('due_on')
 
-    open_closed_cnts = milestones.values('open_issues', 'closed_issues')
+    open_closed_cnts = get_issue_counts_query_base().values('open_issues', 'closed_issues')
     num_open_issues = sum(x['open_issues'] for x in open_closed_cnts)
     num_closed_issues = sum( x['closed_issues'] for x in open_closed_cnts)
 
@@ -61,7 +71,7 @@ def view_by_columns(request):
 
     d = {}
 
-    d['page_title'] = 'IQSS Data Science Projects: Milestones'
+    d['page_title'] = 'Current Project Milestones'
     d['last_retrieval_time'] = last_retrieval_time
     d['sorted_repos'] = sorted_repos
     d['organized_months'] = mmo.get_organized_months()
@@ -110,7 +120,8 @@ def view_single_repo_column(request, repo_name):
             ms.days_remaining = ms.due_on.replace(tzinfo=None) - current_date#.date()
 
 
-    open_closed_cnts = milestones.values('open_issues', 'closed_issues')
+    #open_closed_cnts = milestones.values('open_issues', 'closed_issues')
+    open_closed_cnts = get_issue_counts_query_base(chosen_repo).values('open_issues', 'closed_issues')
     num_open_issues = sum(x['open_issues'] for x in open_closed_cnts)
     num_closed_issues = sum( x['closed_issues'] for x in open_closed_cnts)
 
@@ -118,7 +129,7 @@ def view_single_repo_column(request, repo_name):
 
     d['repos'] = Repository.objects.select_related('organization', 'parent_repository').filter(parent_repository__isnull=True).filter(is_visible=True)
 
-    d['page_title'] = 'IQSS Data Science: %s Milestones' % chosen_repo
+    d['page_title'] = 'Current Milestones: %s' % chosen_repo
     d['page_title_link'] = chosen_repo.get_github_view_url()
     #d['page_title_link'] = chosen_repo.get_github_view_milestones_url()
 
@@ -130,7 +141,7 @@ def view_single_repo_column(request, repo_name):
     d['num_closed_issues'] = num_closed_issues
 
     d['SINGLE_COLUMN'] = True
-    print(d)
+    #print(d)
     return render_to_response('milestones/view_single_repo_column.html'\
                               , d\
                               , context_instance=RequestContext(request))

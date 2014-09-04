@@ -1,6 +1,8 @@
+import urllib
 
 GITHUB_VIEW_URL_BASE = 'https://github.com'
 GITHUB_API_URL_BASE = 'https://api.github.com'
+
 def urljoin(*parts):
     return "/".join(map(lambda x: str(x).rstrip('/'), parts))
 
@@ -23,7 +25,8 @@ def get_github_view_url(github_obj, is_closed=False):
             return urljoin(GITHUB_VIEW_URL_BASE\
                         , github_obj.repository.organization.github_login\
                         , github_obj.repository.github_name\
-                        , 'issues?q=is:closed+milestone:"%s"' % github_obj.title\
+                        , 'issues?'\
+                        , urllib.quote('q=is:closed+milestone:"%s"' % (github_obj.title))\
                     )
             
             
@@ -32,7 +35,7 @@ def get_github_view_url(github_obj, is_closed=False):
                     , github_obj.repository.organization.github_login\
                     , github_obj.repository.github_name\
                     , 'milestones'\
-                    , github_obj.title)
+                    , urllib.quote(github_obj.title))
         
                     
     elif class_name == 'Repository':

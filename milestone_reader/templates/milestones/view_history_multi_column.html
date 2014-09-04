@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 <!-- START: CONTENT -->{% block content %}
 <p>
-    <b>{{ milestone_count }}</b> milestone{{ milestone_count|pluralize }} found.
-        Issues: <b>{{ num_open_issues }}</b> open.  <b>{{ num_closed_issues }}</b> closed.
+    <b>{{ milestone_count }}</b> older milestone{{ milestone_count|pluralize }} found for <b>{{ chosen_year}}</b>.  View <a href="{% url 'view_by_columns' %}">current milestones</a>.
+        {#Issues: <b>{{ num_open_issues }}</b> open.  <b>{{ num_closed_issues }}</b> closed.#}
         {% if last_retrieval_time %}<br /><small><i>updated: {{ last_retrieval_time }}</i></small>{% endif %}
 
 </p>
 <table class="table xtable-bordered table-condensed" id="mstone_table">
     <thead>
         <tr>
-            <th style="font-weight:normal"><a href="{% url 'view_milestone_history' %}">(milestone history)</a></th>
+            <th style="font-weight:normal"><a href="{% url 'view_by_columns' %}">(current milestones)</a></th>
             {% for repo in sorted_repos %}
             {#<th><a href="{{ repo.get_github_view_url }}">{{ repo }}</a></td>#}
              <th><a class="btn btn-primary btn-default" href="{% url 'view_single_repo_column' repo.github_name %}">{{ repo }}</a></th>
@@ -18,6 +18,5 @@
         </tr>
     </thead>
     {% include "milestones/milestone_column_content.html" %}
-
 </table>
 <!-- END: CONTENT -->{% endblock  %}

@@ -1,0 +1,29 @@
+{% for org_month in organized_months %}
+<tr>
+    {% for month_milestone_info in org_month %}
+        {% if forloop.first %}
+            <td>
+                <div>
+                    {% if month_milestone_info.month == NO_DUE_DATE %}
+                    <span class="label label-primary">no due date</span>
+                {% else %}
+                    {#<span class="label label-primary">{{ month_milestone_info.month|date:"M Y" }}</span>#}
+                    <div class="alert alert-info" role="alert">{{ month_milestone_info.month|date:"M Y" }}</div>
+                {% endif %}
+                </div>
+            </td>
+        {% endif %}
+        <td class="ms_td">{% for ms in month_milestone_info.milestones %}
+               {% include "milestones/milestone_description3.html" %}
+
+            {% empty %}
+                {# --- NO REPO MILESTONES FOR THIS MONTH --- #}
+                  <div class="well well-sm" style="background-color:#fff;color:#ccc;">
+                      <small><i>No milestones this month</i></small>
+                  </div>
+
+            {% endfor %}
+        </td>
+    {% endfor %}
+</tr>
+{% endfor %}

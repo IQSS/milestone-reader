@@ -79,7 +79,8 @@ class MilestoneMonthOrganizer:
         repos.sort(key=lambda x: x.display_order)
         return repos
 
-    def get_organized_months(self):
+
+    def get_organized_months(self, descending_order=False):
         msgt('get_organized_months')
         """
         Display
@@ -117,6 +118,8 @@ class MilestoneMonthOrganizer:
             month_milestone_list.append(single_month_list)
 
         dashes()
+        if descending_order:
+            month_milestone_list.reverse()
         return month_milestone_list
 
     def organize_milestones(self, milestones):

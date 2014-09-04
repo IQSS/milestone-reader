@@ -7,7 +7,7 @@
         "github_id": 675237, 
         "created": "2014-08-17T18:36:04.253Z", 
         "modified": "2014-08-17T18:37:20.525Z", 
-        "github_name": "Institute for Quantitative Social Science\"", 
+        "github_name": "Institute for Quantitative Social Science", 
         "homepage": ""
     }
 },
@@ -25,6 +25,7 @@
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "TwoRavens", 
+        "display_name": "TwoRavens",                         
         "homepage": "", 
         "is_private": false
     }
@@ -43,6 +44,7 @@
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "dataverse", 
+        "display_name": "Dataverse",                         
         "homepage": "", 
         "is_private": false
     }
@@ -61,6 +63,7 @@
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "geoconnect", 
+        "display_name": "GeoConnect",                 
         "homepage": "", 
         "is_private": false
     }
@@ -70,7 +73,7 @@
     "model": "repositories.repository", 
     "fields": {
         "is_visible": true, 
-        "description": "Zelig5", 
+        "description": "Zelig", 
         "github_id": 14958190, 
         "created": "2014-08-19T19:57:07.312Z", 
         "display_order": 10, 
@@ -78,7 +81,8 @@
         "parent_repository": null, 
         "last_retrieval_time": null, 
         "organization": 1, 
-        "github_name": "Zelig5", 
+        "github_name": "Zelig", 
+        "display_name": "Zelig",         
         "homepage": "", 
         "is_private": false
     }
@@ -97,25 +101,8 @@
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "Zelig5Choice", 
+        "display_name": "Zelig5Choice",         
         "homepage": "", 
-        "is_private": false
-    }
-},
-{
-    "pk": 6, 
-    "model": "repositories.repository", 
-    "fields": {
-        "is_visible": true, 
-        "description": "Statistical software for everyone", 
-        "github_id": 1022749, 
-        "created": "2014-08-19T19:59:07.505Z", 
-        "display_order": 14, 
-        "modified": "2014-08-20T02:48:09.058Z", 
-        "parent_repository": 4, 
-        "last_retrieval_time": null, 
-        "organization": 1, 
-        "github_name": "Zelig", 
-        "homepage": "http://projects.iq.harvard.edu/zelig", 
         "is_private": false
     }
 },
@@ -133,6 +120,7 @@
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "DataTags", 
+        "display_name": "DataTags", 
         "homepage": "", 
         "is_private": false
     }
@@ -151,6 +139,7 @@
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "consilience", 
+        "display_name": "Consilience", 
         "homepage": "", 
         "is_private": true
     }
@@ -169,6 +158,7 @@
         "last_retrieval_time": null, 
         "organization": 1, 
         "github_name": "PhthisisRavens", 
+        "display_name": "PhthisisRavens", 
         "homepage": "", 
         "is_private": true
     }

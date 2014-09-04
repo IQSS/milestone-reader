@@ -28,7 +28,7 @@
     {#% if not ms.is_open %}<span class="label label-info"><span style="color:#fff;" class="glyphicon glyphicon-ok-circle"></span>  complete</span><br />{% endif %#} 
     
 
-    <!-- repository label --><span class="label label-success"><a href="{{ ms.repository.get_github_view_url }}" data-toggle="popover" title="{{ ms.repository }}" data-content="{{ ms.repository.description }}" style="color:#fff;">{{ ms.repository }}</a></span>
+    <!-- repository label --><span class="label label-info"><a href="{{ ms.repository.get_github_view_url }}" data-toggle="popover" title="{{ ms.repository }}" data-content="{{ ms.repository.description }}" style="color:#fff;">{{ ms.repository }}</a></span>
 
     {% if ms.repository.is_private %}
     <!-- private label --><span class="label label-warning"><a href="{{ ms.repository.get_github_view_url }}" style="color:#fff;">Private</a></span>

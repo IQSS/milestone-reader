@@ -14,13 +14,20 @@
     
     <style>
       body {
-    /*    padding-top: 60px;/* /* 60px to make the container go all the way to the bottom of the topbar */
+        padding-top: 50px; /* 60px to make the container go all the way to the bottom of the topbar */
         
       }
+      #mstone_table .ms_td {width:17%;}
+      
+      #title-link{color:#000; 
+            text-decoration:none;}
+      #title-link:hover{color:#3a8acc;}
+
       div.panel-heading{padding:8px;}
       div.panel-body{padding:10px;}
       .popover-title{ color: #333;}
       .popover-content{ color: #333; font-weight:normal; font-size:110%; line-height:150%;}
+      .navbar-brand{height:15px;}
     </style>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -44,16 +51,23 @@
   </head>
 
   <body>
-    {#% include "base_navbar.html" %#}
+    {% include "base_navbar.html" %}
    
-
+<div class="fluid-container" style="background-color:#eee; border-bottom:2px solid #ccc;">
     <div class="container">
-
+        <div class="row">
+              <div class="col-md-6"><a href="http://datascience.iq.harvard.edu/" id="title-link"><h4>Data Science:<br /><span style="font-size:80%; font-weight:normal;font-style:italic;"> Research Frameworks for Data-Intensive Science,<br /> Analytical Tools and Data Stewardship</span></h4></a></div>
+              <div class="col-md-6 text-right"><a href="http://www.iq.harvard.edu/"><img src="http://static.projects.iq.harvard.edu/files/styles/os_files_small/public/datascience/files/iqsslogo-w_hu-large1.png?itok=jD1krrEU" alt="IQSS" /></a></div>
+          </div>
+    </div>
+</div>
+    <div class="container">
+   
         {% if page_title_link %}
-          <h3><a href="{{ page_title_link }}">{{ page_title }}</a></h3>
+          <h4><a href="{{ page_title_link }}">{{ page_title }}</a></h4>
         {% else %}
-          <h3><a href="http://datascience.iq.harvard.edu">{{ page_title }}</a></h3>
-        {% endif %}
+          <h4><a href="http://datascience.iq.harvard.edu">{{ page_title }}</a></h4>
+        {% endif %}<br />
 
       {% block content %}
       <div class="well">
@@ -64,8 +78,22 @@
         </ul>
       </div>
       {% endblock %}
+  </div> <!-- /container -->
+      
+      {% block footer %}
 
-    </div> <!-- /container -->
+
+      <div class="fluid-container" style="background-color:#eee; color:#999; border-top:2px solid #ccc; padding:15px 0;">
+          <div class="container">
+              <div class="row">
+                    <div class="col-md-12">  <a href="http://datascience.iq.harvard.edu">Data Science</a> at <a href="http://www.iq.harvard.edu/">The Institute for Quantitative and Social Science</a>
+                     &nbsp;|&nbsp; <a href="https://github.com/IQSS/milestone-reader">code <img src="https://github.com/fluidicon.png" width="20" alt="github" /></a>
+                      <br />Copyright &copy; {% now "Y" %} The President and Fellows of Harvard College
+                      <br /><small>({% now "F jS, Y f:s a" %})</small>                     
+                </div>
+          </div>
+      </div>
+      {% endblock %}
 
     <!-- Le javascript
     ================================================== -->
