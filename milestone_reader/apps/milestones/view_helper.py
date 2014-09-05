@@ -96,21 +96,21 @@ class MilestoneMonthOrganizer:
         # ]
         repos  = self.get_sorted_repos()
         for month_obj in self.month_list:
-            msg('Month: %s' % month_obj )
+            #msg('Month: %s' % month_obj )
             single_month_list = []  #  [ repo 1 MonthMilestones  ]  [ repo 2 MonthMilestones  ]  [  repo 3 MonthMilestones ] ...
             # create single row for the current month
             for repo in repos:
-                msg('-- repo: %s' % repo)
+                #msg('-- repo: %s' % repo)
 
                 repo_milestone_months_organizer = self.repo_lookups.get(repo, None)
                 if repo_milestone_months_organizer is None:
-                    msg('   no organizer for this repo (wrong!)')
+                    #msg('   no organizer for this repo (wrong!)')
                     single_month_list.append(MonthMilestones(month_obj, None))   # No milestones for this repo/month
                 else:
                     #msg('   should be milestones')
                     repo_milestones = repo_milestone_months_organizer.get_milestones_for_month(month_obj)
                     if repo_milestones is None:
-                        msg('   no milestones found')
+                        #msg('   no milestones found')
                         single_month_list.append(MonthMilestones(month_obj, None))
                     else:
                         msg('   milestones found: %s' % repo_milestones)
