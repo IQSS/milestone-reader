@@ -85,7 +85,7 @@ def view_milestone_history(request, chosen_year=None):
     d['num_closed_issues'] = num_closed_issues
 
     d['hide_description'] = True
-    print(d)
+    #print(d)
     return render_to_response('milestones/view_history_multi_column.html'\
                               , d\
                               , context_instance=RequestContext(request))

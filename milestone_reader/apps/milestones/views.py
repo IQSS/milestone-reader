@@ -81,7 +81,7 @@ def view_by_columns(request):
     d['num_closed_issues'] = num_closed_issues
 
     d['hide_description'] = True
-    print(d)
+    #print(d)
     return render_to_response('milestones/view_multi_column.html'\
                               , d\
                               , context_instance=RequestContext(request))

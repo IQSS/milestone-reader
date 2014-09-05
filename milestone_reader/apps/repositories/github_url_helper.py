@@ -52,7 +52,7 @@ def get_github_view_url(github_obj, is_closed=False):
     return None
     
 def get_github_api_milestones_url(repository):
-    print 'repository', repository
+    #print 'repository', repository
     """
     Given a repository project, return a url with this structure:
     
