@@ -6,17 +6,6 @@
         {% if last_retrieval_time %}<br /><small><i>updated: {{ last_retrieval_time }}</i></small>{% endif %}
 
 </p>
-<table class="table xtable-bordered table-condensed" id="mstone_table">
-    <thead>
-        <tr>
-            <th style="font-weight:normal"><a href="{% url 'view_by_columns' %}">(current milestones)</a></th>
-            {% for repo in sorted_repos %}
-            {#<th><a href="{{ repo.get_github_view_url }}">{{ repo }}</a></td>#}
-             <th><a class="btn btn-primary btn-default" href="{% url 'view_single_repo_column' repo.github_name %}">{{ repo }}</a></th>
-            {#<th><a href="{% url 'view_single_repo_column' repo.github_name %}">{{ repo }}</a></th>#}
-            {% endfor %}
-        </tr>
-    </thead>
-    {% include "milestones/milestone_column_content.html" %}
-</table>
+
+{% include "milestones/milestone_column_content.html" %}
 <!-- END: CONTENT -->{% endblock  %}

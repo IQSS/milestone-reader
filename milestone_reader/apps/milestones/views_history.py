@@ -74,6 +74,7 @@ def view_milestone_history(request, chosen_year=None):
     d = {}
 
     d['page_title'] = 'Milestone History for %s' % chosen_year
+    d['is_milestone_history'] = True
     d['chosen_year'] = chosen_year
     d['last_retrieval_time'] = last_retrieval_time
     d['sorted_repos'] = sorted_repos

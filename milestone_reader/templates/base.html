@@ -11,6 +11,7 @@
     <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
     <script src="{{ STATIC_URL }}js/jquery-1.11.1.min.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/milestone_reader.js"></script>
     
     <style>
       body {
@@ -22,7 +23,6 @@
       #title-link{color:#000; 
             text-decoration:none;}
       #title-link:hover{color:#3a8acc;}
-
       div.panel-heading{padding:8px;}
       div.panel-body{padding:10px;}
       .popover-title{ color: #333;}
@@ -43,8 +43,7 @@
     {% block extra_css %}{% endblock %}
     <script>
         $( document ).ready(function() {
-            //$('[data-toggle="tooltip"]').tooltip({'placement': 'top'});
-            $('[data-toggle="popover"]').popover({trigger: 'hover','placement': 'top'});
+            link_popovers();
         });
         
     </script>

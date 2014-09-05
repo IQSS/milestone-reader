@@ -2,55 +2,70 @@
 {% if ms.is_open %} 
     {% if ms.repository.parent_repository %}
         <div class="panel panel-info">
-       <!-- div class="well well-sm" style="background-color:#edf3fe;" -->
     {% else %}
         <div class="panel panel-default">    
-        <!-- div class="well well-sm" style="background-color:#f5f5f5;" -->
     {% endif %}
 {% else %}
     <div class="panel panel-success">    
 {% endif %}
 
  <div class="panel-heading">    
-
+     {# <!-- START: DUE DATE LABEL --> #}
     {% if ms.due_on %}
-    
             {% if SINGLE_COLUMN %}
-            <!-- due date w/ year --><span class="label label-default"><a href="{{ ms.get_view_open_issues_url }}" style="color:#fff;"><span class="glyphicon glyphicon-calendar"></span>&nbsp;{% if ms.is_open %}{{ ms.due_on|date:"M j Y" }}{% else %}<s>{{ ms.due_on|date:"M j Y" }}</s>{% endif %}</a></span>
+                {% if ms.is_open %}
+                <!-- due date w/ year --><span class="label label-default"><a href="{{ ms.get_view_open_issues_url }}" style="color:#fff;"><span class="glyphicon glyphicon-calendar"></span>&nbsp;{{ ms.due_on|date:"M j Y" }}</a></span>                
+                {% else %}
+                <!-- due date w/ year --><span class="label label-default"><a href="{{ ms.get_view_closed_issues_url }}" style="color:#fff;"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<s>{{ ms.due_on|date:"M j Y" }}</s></a></span>
+                {% endif %}
             {% else %}
-            <!-- due date --><span class="label label-default"><a href="{{ ms.get_view_open_issues_url }}" style="color:#fff;"><span class="glyphicon glyphicon-calendar"></span>&nbsp;{% if ms.is_open %}{{ ms.due_on|date:"M j" }}{% else %}<s>{{ ms.due_on|date:"M j" }}</s>{% endif %}</a></span>
-            {% endif %}
-        
+                {% if ms.is_open %}
+                <!-- due date --><span class="label label-default"><a href="{{ ms.get_view_open_issues_url }}" style="color:#fff;"><span class="glyphicon glyphicon-calendar"></span>&nbsp;{{ ms.due_on|date:"M j" }}</a></span>            
+                {% else %}
+                <!-- due date --><span class="label label-default"><a href="{{ ms.get_view_closed_issues_url }}" style="color:#fff;"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<s>{{ ms.due_on|date:"M j" }}</s></a></span>                
+                {% endif %}                
+            {% endif %}        
     {% else %}
     
         <!-- no due date --><span class="label label-info">no due date</span>
     {% endif %}
-    {#% if not ms.is_open %}<span class="label label-info"><span style="color:#fff;" class="glyphicon glyphicon-ok-circle"></span>  complete</span><br />{% endif %#} 
+    {# <!-- END: DUE DATE LABEL --> #}
     
 
-    <!-- repository label --><span class="label label-info"><a href="{{ ms.repository.get_github_view_url }}" data-toggle="popover" title="{{ ms.repository }}" data-content="{{ ms.repository.description }}" style="color:#fff;">{{ ms.repository }}</a></span>
-
+    {# <!-- REPOSITORY LABEL --> #}
+    <span class="label label-info"><a href="{{ ms.repository.get_github_view_url }}" style="color:#fff;">{{ ms.repository }}</a></span>
+    
+    {# <!-- PRIVATE LABEL --> #}
     {% if ms.repository.is_private %}
-    <!-- private label --><span class="label label-warning"><a href="{{ ms.repository.get_github_view_url }}" style="color:#fff;">Private</a></span>
+    <span class="label label-warning"><a href="{{ ms.repository.get_github_view_url }}" style="color:#fff;">Private</a></span>
     {% endif %}
 
-    <!-- title -->
+    {# <!-- START: TITLE --> #}
     {% if SINGLE_COLUMN %}
+
         <h4><a href="{{ ms.get_view_open_issues_url }}"{% if not ms.is_open %} style="color:#999;"{% endif %}>{{ ms.title }}</a></h4>
+
     {% else %}
-        <h5><a href="{{ ms.get_view_open_issues_url }}"{% if not ms.is_open %} style="color:#999;"{% endif %}>{{ ms.title }}</a></h5>
+
+        <h5><a href="{{ ms.get_view_open_issues_url }}"{% if not ms.is_open %} style="color:#999;"{% endif %}  data-toggle="popover" title="{{ ms.title }}"  data-content-target="#ms-desc-{{ ms.id }}">{{ ms.title }}</a></h5>
+     <div id="ms-desc-{{ ms.id }}" class="hide">{% if ms.markdown_description %}{{ ms.markdown_description|safe }}{% else %}{% if ms.description %}{{ ms.description|safe|linebreaksbr }}{% endif %}{% endif %}</div>       
+
     {% endif %}
+    {# <!-- END: TITLE --> #}
+    
  </div>
-    <!--hr /-->
+
 <div class="panel-body">
-    <!-- description -->
+    {# <!-- DESCRIPTION --> #}
     {% if not hide_description %}
         {% if ms.markdown_description %}
             {{ ms.markdown_description|safe }}
         {% else %}{% if ms.description %}
             {{ ms.description|linebreaksbr }}
         {% endif %}{% endif %}
-    {% endif %}    
+    {% endif %}   
+    
+    {# <!-- ISSUE COUNTS W/ LINKS --> #} 
     {% if ms.is_open %}
         open issues: <a href="{{ ms.get_view_open_issues_url }}">{{ ms.open_issues }}</a><br />
         closed issues: <a href="{{ ms.get_view_closed_issues_url }}">{{ ms.closed_issues }}</a>
