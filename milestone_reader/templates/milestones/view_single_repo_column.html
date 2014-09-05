@@ -17,7 +17,10 @@
 </div>
 
 <div>
-    <p><br /><b>{{ milestone_count }}</b> milestone{{ milestone_count|pluralize }} found.
+    {% if chosen_repository %}
+    <p><br /><b>{{ chosen_repository }}</b>: {{ chosen_repository.description }}</p>
+    {% endif %}
+    <p><b>{{ milestone_count }}</b> milestone{{ milestone_count|pluralize }} found.
         Issues: <b>{{ num_open_issues }}</b> open.  <b>{{ num_closed_issues }}</b> closed.
         {% if chosen_repository %}<br /><small><i>updated: {{ chosen_repository.last_retrieval_time }}</i></small>{% endif %}
     </p>
