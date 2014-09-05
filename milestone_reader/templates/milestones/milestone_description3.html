@@ -46,10 +46,15 @@
         <h4><a href="{{ ms.get_view_open_issues_url }}"{% if not ms.is_open %} style="color:#999;"{% endif %}>{{ ms.title }}</a></h4>
 
     {% else %}
+        {% if ms.is_open %} 
 
-        <h5><a href="{{ ms.get_view_open_issues_url }}"{% if not ms.is_open %} style="color:#999;"{% endif %}  data-toggle="popover" title="{{ ms.title }}"  data-content-target="#ms-desc-{{ ms.id }}">{{ ms.title }}</a></h5>
-     <div id="ms-desc-{{ ms.id }}" class="hide">{% if ms.markdown_description %}{{ ms.markdown_description|safe }}{% else %}{% if ms.description %}{{ ms.description|safe|linebreaksbr }}{% endif %}{% endif %}</div>       
-
+        <h5><a href="{{ ms.get_view_open_issues_url }}" data-toggle="popover" title="{{ ms.title }}"  data-content-target="#ms-desc-{{ ms.id }}">{{ ms.title }}</a></h5>
+        {% else %}
+        <h5><a href="{{ ms.get_view_closed_issues_url }}" style="color:#999;" %}  data-toggle="popover" title="{{ ms.title }}"  data-content-target="#ms-desc-{{ ms.id }}">{{ ms.title }}</a></h5>
+        
+        {% endif %}
+        <div id="ms-desc-{{ ms.id }}" class="hide">{% if ms.markdown_description %}{{ ms.markdown_description|safe }}{% else %}{% if ms.description %}{{ ms.description|safe|linebreaksbr }}{% endif %}{% endif %}</div>       
+        
     {% endif %}
     {# <!-- END: TITLE --> #}
     
