@@ -8,7 +8,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', TemplateView.as_view(template_name='base.html')),
+    #url(r'^$', TemplateView.as_view(template_name='base.html')),
 
     # Examples:
     # url(r'^$', 'milestone_reader.views.home', name='home'),
