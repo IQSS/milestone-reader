@@ -174,9 +174,12 @@ class MilestoneRetriever:
         # Prepare to evaluate the form
         mform = MilestoneForm(mstone_params)
         if mform.is_valid():
-            # valid params 
+            # valid params from the form
             valid_milestone_params = mform.cleaned_data
+            
+            # set the markdown_description field as blank
             valid_milestone_params['markdown_description'] = ''
+
             # Does this milestone exist?
             milestone_to_update, created = Milestone.objects.get_or_create(github_id=github_id, defaults=valid_milestone_params)
             

@@ -33,7 +33,13 @@
     
 
     {# <!-- REPOSITORY LABEL --> #}
+    {% if ms.repository.parent_repository %}
+    <span class="label label-info"><a href="{{ ms.repository.get_github_view_url }}" style="color:#fff;" data-toggle="popover" title="{{ repo }}" data-content-target="#subrepo-desc-{{ ms.repository.id }}">{{ ms.repository }}</a></span>   
+    {# <!-- hidden div with repository description.  shown when hovering over repo name--> #} 
+    <div id="subrepo-desc-{{ ms.repository.id }}" class="hide">{{ ms.repository.description|linebreaksbr }}</div>
+    {% else %}
     <span class="label label-info"><a href="{{ ms.repository.get_github_view_url }}" style="color:#fff;">{{ ms.repository }}</a></span>
+    {% endif %}
     
     {# <!-- PRIVATE LABEL --> #}
     {% if ms.repository.is_private %}
