@@ -81,7 +81,7 @@ class MilestoneMonthOrganizer:
 
 
     def get_organized_months(self, descending_order=False):
-        msgt('get_organized_months')
+        #msgt('get_organized_months')
         """
         Display
             month 1 [ repo 1 MonthMilestones  ]  [ repo 2 MonthMilestones  ]  [  repo 3 MonthMilestones ]
@@ -113,7 +113,7 @@ class MilestoneMonthOrganizer:
                         #msg('   no milestones found')
                         single_month_list.append(MonthMilestones(month_obj, None))
                     else:
-                        msg('   milestones found: %s' % repo_milestones)
+                        #msg('   milestones found: %s' % repo_milestones)
                         single_month_list.append(MonthMilestones(month_obj, repo_milestones))   # No milestones for this repo/month
             month_milestone_list.append(single_month_list)
 
