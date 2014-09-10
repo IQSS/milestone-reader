@@ -328,7 +328,7 @@ if __name__=='__main__':
     ms = MilestoneRetriever()
     ms.update_repository_info()
     ms.retrieve_milestones()
-    #ms.translate_markdown_descriptions_to_html()
+    ms.translate_markdown_descriptions_to_html()
     
     #repo = Repository.objects.get(pk=2)
     #milestone_dict = MilestoneForm.get_test_milestone()
