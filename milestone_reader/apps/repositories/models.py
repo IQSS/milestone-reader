@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.conf import settings
 
 from model_utils.models import TimeStampedModel
-from apps.repositories.github_url_helper import get_github_api_milestones_url, get_github_view_url, get_view_repository_milestones_url
+from apps.repositories.github_url_helper import get_github_api_repository_url, get_github_view_url, get_view_repository_milestones_url
 
 
 class Organization(TimeStampedModel):
@@ -68,7 +68,7 @@ class Repository(TimeStampedModel):
     def get_github_view_milestones_url(self):
         return get_view_repository_milestones_url(self)
 
-    def get_github_api_url(self):
-        return get_github_api_milestones_url(self)
+    def get_github_api_url(self, milestones=False):
+        return get_github_api_repository_url(self, milestones=milestones)
     
     

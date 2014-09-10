@@ -11,6 +11,7 @@ from datetime import datetime
 import requests
 import json
 from django.conf import settings
+from django.core.mail import send_mail
 
 from milestone_reader.utils.msg_util import *
 
@@ -31,17 +32,124 @@ class MilestoneInvalidException(Exception):
 class MilestoneRetriever:
     """For each visible Repository, retrieve its milestones"""
     
-    def __init__(self, delete_removed_milestones=True):
+    def __init__(self, delete_removed_milestones=True, **kwargs):
 
         # Let this blow up on an error
         try:
             self.github_username = settings.GITHUB_REPOSITORY_PASSWORD_DICT['GITHUB_USERNAME']
         except: 
             raise GitHubCredentialsException("MilestoneRetriever.Failed to retrieve GITHUB_USERNAME from settings")
-
+            
+        self.update_repo_description = kwargs.get('update_repo_description', True)
         self.delete_removed_milestones = delete_removed_milestones
         self.retrieval_time = datetime.now()
     
+    
+    def send_admin_error_email(self, err_msg):
+        
+        try:
+            admin_email = settings.ADMINS[0][0]
+        except:
+            return
+    
+
+        send_mail('Milestone update failed'\
+                , err_msg\
+                , admin_email\
+                , [admin_email]\
+                , fail_silently=False\
+                )
+    
+    
+    def update_repository_info(self):
+    
+        repos = Repository.objects.select_related(\
+                                'parent_repository', 
+                            ).filter(is_visible=True)
+    
+        for repo in repos:
+            self.update_single_repository(repo)
+    
+    def format_failed_response_err_msg(self, description, repo, request_url, resp_obj):
+        if not type(description) is str:
+            raise TypeError('description not a str')
+        if not type(request_url) is str:
+            raise TypeError('request_url not a str')
+        if resp_obj is None:
+            raise TypeError('resp_obj is None')
+        
+        return """%s\
+
+---------------
+repository/milestone: %s
+---------------
+url: %s
+---------------
+status code: %s
+---------------
+response: 
+%s
+---------------
+""" % (description, repo, request_url, resp_obj.status_code, resp_obj.text )
+        
+        
+        
+    
+    def update_single_repository(self, repo):
+        """
+        Retrieve repository information via the github api.
+        Update the repository description, etc.
+        
+        example of api url: https://api.github.com/repos/IQSS/dataverse
+        """
+        if not type(repo) == Repository:
+            return False
+        msgt('Repository update: %s' % repo)
+         
+        repo_api_url = repo.get_github_api_url()
+        request_auth = (self.github_username, self.get_api_key(repo))
+    
+        msg('repo_api_url: %s' % repo_api_url)
+        r = requests.get(repo_api_url, auth=request_auth)
+
+        msg('Staus code: %s' % r.status_code)
+
+        if not r.status_code == 200:
+            err_msg = self.format_failed_response_err_msg(\
+                                'Bad status code. Update of repository description failed'\
+                                , repo
+                                , repo_api_url
+                                , r)
+            self.send_admin_error_email(err_msg)
+            return False
+
+        try:
+            repo_dict = r.json()
+        except:
+            err_msg = self.format_failed_response_err_msg(\
+                                'r.json() failed. Update of repository description failed'\
+                                , repo
+                                , repo_api_url
+                                , r)
+            self.send_admin_error_email(err_msg)
+            return False
+            
+        # { github attribute : Repository object attribute }
+        attributes_to_update = dict(description='description'\
+                                    , homepage='homepage'\
+                                    , private='is_private'
+                                    , id='github_id')
+
+        msg(attributes_to_update)
+        for github_key, repo_key in attributes_to_update.items():
+            if repo_dict.has_key(github_key):
+                val = repo_dict.get(github_key, '')
+                if val is None:
+                    val = ''
+                repo.__dict__[repo_key] = val
+
+        repo.save()
+        return True
     
     def translate_markdown_descriptions_to_html(self):
         """Use GitHub's markdown API to translate markdown to html
@@ -71,10 +179,15 @@ class MilestoneRetriever:
                 ms.markdown_description = r.text
                 ms.save()
                 continue
-            # This call failed, do something!
-            # Log it, notify user, etc.
-            print r.status_code
-            print r.text
+            
+            err_msg = self.format_failed_response_err_msg(\
+                                'Failed: translate_markdown_descriptions_to_html'\
+                                , ms
+                                , markdown_url
+                                , r)
+            self.send_admin_error_email(err_msg)
+        
+          
     
     def retrieve_milestones(self):
         """Iterate through visible repositories and retrieve milestones"""
@@ -100,7 +213,7 @@ class MilestoneRetriever:
             raise TypeError('repo is not a Repository object')
         msgt('Get Milestones for Repository: %s' % repo)
         
-        milestones_url = repo.get_github_api_url()
+        milestones_url = repo.get_github_api_url(milestones=True)
         request_auth = (self.github_username, self.get_api_key(repo))
         print 'milestones_url', milestones_url
         req = requests.get(milestones_url, auth=request_auth)
@@ -108,13 +221,23 @@ class MilestoneRetriever:
         msg('Staus code: %s' % req.status_code)
 
         if not req.status_code == 200:
-            # Do something, put this in a db log
+            err_msg = self.format_failed_response_err_msg(\
+                        'Bad status code. Failed: get_repository_milestones'\
+                        , repo
+                        , milestones_url
+                        , req)
+            self.send_admin_error_email(err_msg)
             return
         
         try:
             milestone_dict = req.json()
         except:
-            # Do something, put this in a db log
+            err_msg = self.format_failed_response_err_msg(\
+                        ' req.json() Failed: get_repository_milestones'\
+                        , repo
+                        , milestones_url
+                        , req)
+            self.send_admin_error_email(err_msg)
             return
         
         github_milestone_ids_for_this_repo = []        # to check later for deletions
@@ -199,19 +322,14 @@ class MilestoneRetriever:
             raise MilestoneInvalidException('Milestone data did not pass form validation')
 
             
-         
-    def update_repository(self, repo, json_response):
-        if repo is None or json_response is None:
-            return False
         
-        # to do     
-            
-        return False
             
 if __name__=='__main__':
     ms = MilestoneRetriever()
+    ms.update_repository_info()
     ms.retrieve_milestones()
-    ms.translate_markdown_descriptions_to_html()
+    #ms.translate_markdown_descriptions_to_html()
+    
     #repo = Repository.objects.get(pk=2)
     #milestone_dict = MilestoneForm.get_test_milestone()
     #ms = MilestoneRetriever()

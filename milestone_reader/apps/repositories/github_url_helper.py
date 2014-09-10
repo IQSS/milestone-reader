@@ -50,8 +50,9 @@ def get_github_view_url(github_obj, is_closed=False):
                     , 'orgs'\
                     , github_obj.github_name)
     return None
-    
-def get_github_api_milestones_url(repository):
+
+
+def get_github_api_repository_url(repository, milestones=True):
     #print 'repository', repository
     """
     Given a repository project, return a url with this structure:
@@ -64,10 +65,15 @@ def get_github_api_milestones_url(repository):
     """
     if not repository.__class__.__name__ == 'Repository':
         return None
-        
-    return urljoin(GITHUB_API_URL_BASE\
+    
+    api_url = urljoin(GITHUB_API_URL_BASE\
                     , 'repos'
                     , repository.organization.github_login\
-                    , repository.github_name
+                    , repository.github_name)
+                    
+    if milestones is True:
+        api_url = urljoin(api_url
                     , 'milestones?state=all')
+    
+    return api_url
                     
