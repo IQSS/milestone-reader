@@ -1,0 +1,204 @@
+[
+{
+    "pk": 1, 
+    "model": "repositories.organization", 
+    "fields": {
+        "github_login": "IQSS", 
+        "github_id": 675237, 
+        "created": "2014-08-17T18:36:04.253Z", 
+        "modified": "2014-08-17T18:37:20.525Z", 
+        "github_name": "Institute for Quantitative Social Science", 
+        "homepage": ""
+    }
+},
+{
+    "pk": 1, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "display_name": "TwoRavens", 
+        "description": "A web application for data exploration, statistical analysis, model construction and meta analysis tools, that integrates with Zelig and Dataverse. ", 
+        "github_id": 11134522, 
+        "created": "2014-08-17T19:09:18.653Z", 
+        "display_order": 30, 
+        "modified": "2014-09-15T00:29:17.216Z", 
+        "parent_repository": null, 
+        "last_retrieval_time": "2014-09-15T00:29:13.778Z", 
+        "organization": 1, 
+        "github_name": "TwoRavens", 
+        "homepage": "http://datascience.iq.harvard.edu/tworavens", 
+        "is_private": false
+    }
+},
+{
+    "pk": 2, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "display_name": "Dataverse", 
+        "description": "A data repository framework to share and publish research data.", 
+        "github_id": 14051004, 
+        "created": "2014-08-17T19:10:56.066Z", 
+        "display_order": 20, 
+        "modified": "2014-09-15T00:29:16.861Z", 
+        "parent_repository": null, 
+        "last_retrieval_time": "2014-09-15T00:29:13.778Z", 
+        "organization": 1, 
+        "github_name": "dataverse", 
+        "homepage": "http://thedata.org", 
+        "is_private": false
+    }
+},
+{
+    "pk": 3, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "display_name": "GeoConnect", 
+        "description": "A connector between Dataverse and WorldMap", 
+        "github_id": 19804703, 
+        "created": "2014-08-17T19:11:30.418Z", 
+        "display_order": 22, 
+        "modified": "2014-09-15T00:29:17.046Z", 
+        "parent_repository": 2, 
+        "last_retrieval_time": "2014-09-15T00:29:13.778Z", 
+        "organization": 1, 
+        "github_name": "geoconnect", 
+        "homepage": "", 
+        "is_private": false
+    }
+},
+{
+    "pk": 4, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "display_name": "Zelig", 
+        "description": "A statistical framework that serves as a common interface to a large range of models.", 
+        "github_id": 14958190, 
+        "created": "2014-08-19T19:57:07.312Z", 
+        "display_order": 10, 
+        "modified": "2014-09-15T00:29:16.469Z", 
+        "parent_repository": null, 
+        "last_retrieval_time": "2014-09-15T00:29:13.778Z", 
+        "organization": 1, 
+        "github_name": "Zelig", 
+        "homepage": "http://zeligproject.org", 
+        "is_private": false
+    }
+},
+{
+    "pk": 5, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "display_name": "Zelig5Choice", 
+        "description": "Zelig5Choice", 
+        "github_id": 21401170, 
+        "created": "2014-08-19T19:58:20.934Z", 
+        "display_order": 12, 
+        "modified": "2014-09-15T00:29:16.625Z", 
+        "parent_repository": 4, 
+        "last_retrieval_time": "2014-09-15T00:29:13.778Z", 
+        "organization": 1, 
+        "github_name": "Zelig5Choice", 
+        "homepage": "", 
+        "is_private": false
+    }
+},
+{
+    "pk": 7, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "display_name": "DataTags", 
+        "description": "A system to tag the how private datasets are, and how they should be handled", 
+        "github_id": 12300135, 
+        "created": "2014-08-19T21:21:55.577Z", 
+        "display_order": 40, 
+        "modified": "2014-09-15T00:29:17.450Z", 
+        "parent_repository": null, 
+        "last_retrieval_time": "2014-09-15T00:29:13.778Z", 
+        "organization": 1, 
+        "github_name": "DataTags", 
+        "homepage": "http://datatags.org", 
+        "is_private": false
+    }
+},
+{
+    "pk": 8, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "display_name": "Consilience", 
+        "description": "An application that aids in the discovery of clusters in large sets of documents, in an interactive, computer-assisted fashion.", 
+        "github_id": 1491815, 
+        "created": "2014-08-19T22:03:41.349Z", 
+        "display_order": 100, 
+        "modified": "2014-09-15T00:29:17.660Z", 
+        "parent_repository": null, 
+        "last_retrieval_time": "2014-09-15T00:29:13.778Z", 
+        "organization": 1, 
+        "github_name": "consilience", 
+        "homepage": "http://consilience.com", 
+        "is_private": true
+    }
+},
+{
+    "pk": 9, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "display_name": "PhthisisRavens", 
+        "description": "A web interface for tuberculosis prediction and data exploration tool, using TwoRavens, Dataverse and Zelig.", 
+        "github_id": 21711560, 
+        "created": "2014-08-19T22:11:05.014Z", 
+        "display_order": 10, 
+        "modified": "2014-09-15T00:29:16.130Z", 
+        "parent_repository": 1, 
+        "last_retrieval_time": "2014-09-15T00:29:13.778Z", 
+        "organization": 1, 
+        "github_name": "PhthisisRavens", 
+        "homepage": "", 
+        "is_private": true
+    }
+},
+{
+    "pk": 10, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "display_name": "PrivateZelig", 
+        "description": "A differentially private version of Zelig", 
+        "github_id": 15258421, 
+        "created": "2014-09-10T02:19:44.506Z", 
+        "display_order": 10, 
+        "modified": "2014-09-15T00:29:16.296Z", 
+        "parent_repository": 4, 
+        "last_retrieval_time": "2014-09-15T00:29:13.778Z", 
+        "organization": 1, 
+        "github_name": "PrivateZelig", 
+        "homepage": "", 
+        "is_private": true
+    }
+},
+{
+    "pk": 11, 
+    "model": "repositories.repository", 
+    "fields": {
+        "is_visible": true, 
+        "display_name": "RBuild", 
+        "description": "", 
+        "github_id": 23934940, 
+        "created": "2014-09-15T00:27:23.552Z", 
+        "display_order": 120, 
+        "modified": "2014-09-15T00:29:17.831Z", 
+        "parent_repository": null, 
+        "last_retrieval_time": "2014-09-15T00:29:13.778Z", 
+        "organization": 1, 
+        "github_name": "RBuild", 
+        "homepage": "", 
+        "is_private": false
+    }
+}
+]
