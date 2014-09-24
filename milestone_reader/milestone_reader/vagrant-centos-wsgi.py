@@ -26,11 +26,6 @@ path.append(SITE_ROOT)
 # if running multiple sites in the same mod_wsgi process. To fix this, use
 # mod_wsgi daemon mode with each site in its own daemon process, or use
 # os.environ["DJANGO_SETTINGS_MODULE"] = "jajaja.settings"
-prod_paths = ['/milestone-reader/'\
-    , '/milestone-reader/milestone_reader']
-
-for p in prod_paths:
-    if os.path.isdir(p): sys.path.append(p)
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "milestone_reader.settings.production")
 
