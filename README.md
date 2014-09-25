@@ -2,6 +2,7 @@ milestone-reader
 ================
 
 Mini project to read/aggregate milestones from several github repositories so that they may be presented on one page.
+Live example: (http://roadmap.iq.harvard.edu/)
 
 ### Setup
 
