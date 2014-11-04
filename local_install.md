@@ -18,7 +18,7 @@ This is a quick checklist to install eyeData on an OS X machine.  Currently, it 
 
 #### Setup
 
-##### cd into the eyeData repository
+##### cd into the milestone-reader repository
 
 ```
 cd ~\milestone-reader
