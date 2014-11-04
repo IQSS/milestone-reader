@@ -108,6 +108,7 @@ python manage.py runserver
 
 ```
 cd ~/milestone-reader/milestone_reader/apps/milestones/
+workon milestones
 python milestone_retriever.py
 ```
 
