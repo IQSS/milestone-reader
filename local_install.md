@@ -104,6 +104,8 @@ python manage.py runserver
 
 #### Retrieve the milestones
 
+- Open a new Terminal.  (The other one is running the developement server)
+
 ```
 cd ~/milestone-reader/milestone_reader/apps/milestones/
 python milestone_retriever.py
