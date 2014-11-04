@@ -64,7 +64,7 @@ You should see ```milestone_reader.settings.local```
 
 #### Create file with GitHub personal access tokens
 
-1.  Create a file name [```github_api_secrets.json```](https://github.com/IQSS/milestone-reader/blob/master/milestone_reader/milestone_reader/settings/github_api_secrets_template.json) and take proper care of it
+1.  Create a file named [```github_api_secrets.json```](https://github.com/IQSS/milestone-reader/blob/master/milestone_reader/milestone_reader/settings/github_api_secrets_template.json) and take proper care of it
 
 ```
 cd ~/milestone-reader/milestone_reader/milestone_reader/settings
