@@ -48,7 +48,7 @@ class MilestoneRetriever:
     def send_admin_error_email(self, err_msg):
         
         try:
-            admin_email = settings.ADMINS[0][0]
+            admin_email = settings.ADMINS[0][1]
         except:
             return
     
