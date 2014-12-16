@@ -95,7 +95,7 @@ def view_single_repo_column(request, repo_name):
     :param repo_name:
     :return:
     """
-    milestones = get_basic_milestone_query()#.order_by('due_on')
+    milestones = get_basic_milestone_query().filter(is_open=True)#.order_by('due_on')
 
     try:
         chosen_repo = Repository.objects.select_related('organization', 'parent_repository').get(is_visible=True, github_name=repo_name)
@@ -130,7 +130,7 @@ def view_single_repo_column(request, repo_name):
 
     d['repos'] = Repository.objects.select_related('organization', 'parent_repository').filter(parent_repository__isnull=True).filter(is_visible=True)
 
-    d['page_title'] = 'Current Milestones: %s' % chosen_repo
+    d['page_title'] = 'Milestones: %s' % chosen_repo
     d['page_title_link'] = chosen_repo.get_github_view_url()
     #d['page_title_link'] = chosen_repo.get_github_view_milestones_url()
 
