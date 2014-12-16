@@ -96,8 +96,8 @@
     "model": "repositories.repository", 
     "fields": {
         "is_visible": true, 
-        "display_name": "Zelig5Choice", 
-        "description": "Zelig5Choice", 
+        "display_name": "ZeligChoice", 
+        "description": "ZeligChoice", 
         "github_id": 21401170, 
         "created": "2014-08-19T19:58:20.934Z", 
         "display_order": 12, 
@@ -105,7 +105,7 @@
         "parent_repository": 4, 
         "last_retrieval_time": "2014-10-23T18:52:12.600Z", 
         "organization": 1, 
-        "github_name": "Zelig5Choice", 
+        "github_name": "ZeligChoice", 
         "homepage": "", 
         "is_private": false, 
         "alt_title_display_name": ""
