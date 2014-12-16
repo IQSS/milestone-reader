@@ -32,6 +32,8 @@ class Repository(TimeStampedModel):
     display_name = models.CharField(max_length=255, help_text='(if blank, will be auto-filled with github name)', blank=True)
     organization = models.ForeignKey(Organization)
 
+    alt_title_display_name = models.CharField(max_length=255, help_text='On the ~parent~ repository, set as an alternative title.  e.g. "Zelig and related Products"', blank=True)
+
     github_id = models.IntegerField()
 
     is_visible = models.BooleanField(default=True)

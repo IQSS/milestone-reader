@@ -138,7 +138,10 @@ def view_single_repo(request, repo_name):
     d['is_current_milestones_single_repository'] = True
     d['repos'] = Repository.objects.select_related('organization', 'parent_repository').filter(parent_repository__isnull=True).filter(is_visible=True)
 
-    d['page_title'] = 'Milestones: %s' % chosen_repo
+    if chosen_repo.alt_title_display_name:
+        d['page_title'] = 'Milestones: %s' % chosen_repo.alt_title_display_name
+    else:
+        d['page_title'] = 'Milestones: %s' % chosen_repo
     d['page_title_link'] = chosen_repo.get_github_view_url()
     #d['page_title_link'] = chosen_repo.get_github_view_milestones_url()
 

@@ -11,7 +11,7 @@ admin.site.register(Organization, OrganizationAdmin)
 
 class RepositoryAdmin(admin.ModelAdmin):    
     save_on_top = True
-    list_display = ('github_name', 'display_name', 'organization', 'display_order', 'is_visible', 'is_private','parent_repository', 'last_retrieval_time', 'homepage')
+    list_display = ('github_name', 'display_name', 'organization', 'display_order', 'is_visible', 'is_private','parent_repository', 'alt_title_display_name', 'last_retrieval_time', 'homepage')
     list_editable = ('display_order', 'is_visible', 'parent_repository')
     list_filter = ('is_visible', 'is_private', 'parent_repository',  'organization', )
     search_fields = ('github_name', 'organization__github_name')

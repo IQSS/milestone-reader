@@ -21,14 +21,14 @@
         "github_id": 11134522, 
         "created": "2014-08-17T19:09:18.653Z", 
         "display_order": 30, 
-        "modified": "2014-12-16T21:39:35.106Z", 
+        "modified": "2014-10-23T18:52:19.557Z", 
         "parent_repository": null, 
-        "last_retrieval_time": "2014-10-23T18:52:12Z", 
+        "alt_title_display_name": "", 
+        "last_retrieval_time": "2014-10-23T18:52:12.600Z", 
         "organization": 1, 
         "github_name": "TwoRavens", 
         "homepage": "http://datascience.iq.harvard.edu/tworavens", 
-        "is_private": false, 
-        "alt_title_display_name": "Two Ravens and Related Products"
+        "is_private": false
     }
 },
 {
@@ -43,12 +43,12 @@
         "display_order": 20, 
         "modified": "2014-10-23T18:52:18.702Z", 
         "parent_repository": null, 
+        "alt_title_display_name": "Dataverse and Related Products", 
         "last_retrieval_time": "2014-10-23T18:52:12.600Z", 
         "organization": 1, 
         "github_name": "dataverse", 
         "homepage": "http://thedata.org", 
-        "is_private": false, 
-        "alt_title_display_name": "Dataverse and Related Products"
+        "is_private": false
     }
 },
 {
@@ -63,12 +63,12 @@
         "display_order": 22, 
         "modified": "2014-10-23T18:52:19.176Z", 
         "parent_repository": 2, 
+        "alt_title_display_name": "",         
         "last_retrieval_time": "2014-10-23T18:52:12.600Z", 
         "organization": 1, 
         "github_name": "geoconnect", 
         "homepage": "", 
-        "is_private": false, 
-        "alt_title_display_name": ""
+        "is_private": false
     }
 },
 {
@@ -83,12 +83,12 @@
         "display_order": 10, 
         "modified": "2014-10-23T18:52:17.399Z", 
         "parent_repository": null, 
+        "alt_title_display_name": "Zelig and Related Products",         
         "last_retrieval_time": "2014-10-23T18:52:12.600Z", 
         "organization": 1, 
         "github_name": "Zelig", 
         "homepage": "http://zeligproject.org", 
-        "is_private": false, 
-        "alt_title_display_name": "Zelig and Related Products"
+        "is_private": false
     }
 },
 {
@@ -103,12 +103,12 @@
         "display_order": 12, 
         "modified": "2014-10-23T18:52:18.097Z", 
         "parent_repository": 4, 
+        "alt_title_display_name": "",         
         "last_retrieval_time": "2014-10-23T18:52:12.600Z", 
         "organization": 1, 
         "github_name": "Zelig5Choice", 
         "homepage": "", 
-        "is_private": false, 
-        "alt_title_display_name": ""
+        "is_private": false
     }
 },
 {
@@ -123,12 +123,12 @@
         "display_order": 40, 
         "modified": "2014-10-23T18:52:20.015Z", 
         "parent_repository": null, 
+        "alt_title_display_name": "",                 
         "last_retrieval_time": "2014-10-23T18:52:12.600Z", 
         "organization": 1, 
         "github_name": "DataTags", 
         "homepage": "http://datatags.org", 
-        "is_private": false, 
-        "alt_title_display_name": ""
+        "is_private": false
     }
 },
 {
@@ -143,12 +143,12 @@
         "display_order": 100, 
         "modified": "2014-10-23T18:52:20.488Z", 
         "parent_repository": null, 
+        "alt_title_display_name": "",         
         "last_retrieval_time": "2014-10-23T18:52:12.600Z", 
         "organization": 1, 
         "github_name": "consilience", 
         "homepage": "http://consilience.com", 
-        "is_private": true, 
-        "alt_title_display_name": ""
+        "is_private": true
     }
 },
 {
@@ -163,12 +163,12 @@
         "display_order": 10, 
         "modified": "2014-10-23T18:52:16.653Z", 
         "parent_repository": 1, 
+        "alt_title_display_name": "",         
         "last_retrieval_time": "2014-10-23T18:52:12.600Z", 
         "organization": 1, 
         "github_name": "PhthisisRavens", 
         "homepage": "", 
-        "is_private": true, 
-        "alt_title_display_name": ""
+        "is_private": true
     }
 },
 {
@@ -183,12 +183,12 @@
         "display_order": 10, 
         "modified": "2014-10-23T18:52:17.031Z", 
         "parent_repository": 4, 
+        "alt_title_display_name": "",         
         "last_retrieval_time": "2014-10-23T18:52:12.600Z", 
         "organization": 1, 
         "github_name": "PrivateZelig", 
         "homepage": "", 
-        "is_private": true, 
-        "alt_title_display_name": ""
+        "is_private": true
     }
 },
 {
@@ -203,12 +203,12 @@
         "display_order": 120, 
         "modified": "2014-10-23T18:52:20.829Z", 
         "parent_repository": null, 
+        "alt_title_display_name": "",         
         "last_retrieval_time": "2014-10-23T18:52:12.600Z", 
         "organization": 1, 
         "github_name": "RBuild", 
         "homepage": "", 
-        "is_private": false, 
-        "alt_title_display_name": ""
+        "is_private": false
     }
 },
 {
@@ -223,12 +223,12 @@
         "display_order": 10, 
         "modified": "2014-10-23T18:52:17.755Z", 
         "parent_repository": 2, 
+        "alt_title_display_name": "",         
         "last_retrieval_time": "2014-10-23T18:52:12.600Z", 
         "organization": 1, 
         "github_name": "dataverse.org", 
         "homepage": "", 
-        "is_private": false, 
-        "alt_title_display_name": ""
+        "is_private": false
     }
 }
 ]
