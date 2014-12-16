@@ -4,6 +4,8 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.template import RequestContext
 
+from django.views.decorators.cache import cache_page
+
 from django.db.models import Q
 
 from milestone_reader.utils.msg_util import *
@@ -56,6 +58,8 @@ def get_basic_milestone_params():
     return dict(is_open=True\
                 , repository__is_visible=True)
 
+
+@cache_page(60 * 30)    # 30 minutes 
 def view_by_columns(request):
     """
     http://127.0.0.1:8000/milestones/by-columns/
@@ -96,6 +100,8 @@ def view_by_columns(request):
                               , context_instance=RequestContext(request))
 
 
+                              
+@cache_page(60 * 30)    # 30 minutes 
 def view_single_repo(request, repo_name):
     """
     Show milestones from this repository and any child repositories (direct children, e.g. 1-level)
