@@ -21,8 +21,16 @@ def get_issue_counts_query_base(chosen_repo=None):
         return Milestone.objects.select_related('repository').filter(repository__is_visible=True).filter(Q(repository=chosen_repo)|Q(repository__parent_repository=chosen_repo))
     else:
         return Milestone.objects.select_related('repository').filter(repository__is_visible=True)
-    
-    
+
+
+def get_single_repo_milestone_query(is_open=True):
+
+    return Milestone.objects.select_related('repository', 'repository__organization', 'repository__parent_repository'\
+                                ).filter(is_open=is_open\
+                                       , repository__is_visible=True\
+                                )
+
+
 def get_basic_milestone_query():
     """
     Show all tickets from current month onwards: open and closed tickets
@@ -88,14 +96,14 @@ def view_by_columns(request):
                               , context_instance=RequestContext(request))
 
 
-def view_single_repo_column(request, repo_name):
+def view_single_repo(request, repo_name):
     """
     Show milestones from this repository and any child repositories (direct children, e.g. 1-level)
     :param request:
     :param repo_name:
     :return:
     """
-    milestones = get_basic_milestone_query().filter(is_open=True)#.order_by('due_on')
+    milestones = get_single_repo_milestone_query(is_open=True)
 
     try:
         chosen_repo = Repository.objects.select_related('organization', 'parent_repository').get(is_visible=True, github_name=repo_name)
@@ -127,7 +135,7 @@ def view_single_repo_column(request, repo_name):
     num_closed_issues = sum( x['closed_issues'] for x in open_closed_cnts)
 
     d = {}
-
+    d['is_current_milestones_single_repository'] = True
     d['repos'] = Repository.objects.select_related('organization', 'parent_repository').filter(parent_repository__isnull=True).filter(is_visible=True)
 
     d['page_title'] = 'Milestones: %s' % chosen_repo
@@ -140,10 +148,11 @@ def view_single_repo_column(request, repo_name):
 
     d['num_open_issues'] = num_open_issues
     d['num_closed_issues'] = num_closed_issues
+    
 
     d['SINGLE_COLUMN'] = True
     #print(d)
-    return render_to_response('milestones/view_single_repo_column.html'\
+    return render_to_response('milestones/view_single_repo.html'\
                               , d\
                               , context_instance=RequestContext(request))
 

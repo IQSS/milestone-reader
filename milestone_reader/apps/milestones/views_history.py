@@ -13,13 +13,13 @@ from apps.milestones.models import Milestone
 
 from apps.milestones.view_helper import MilestoneMonthOrganizer, RepoMilestoneMonthsOrganizer
 
-from apps.milestones.views import get_issue_counts_query_base
+from apps.milestones.views import get_issue_counts_query_base, get_single_repo_milestone_query
 
-    
-    
+
+
 def get_basic_milestone_history_query(chosen_year=None):
     """
-    Show all tickets from current month onwards: open and closed tickets
+    Show all tickets from previous month backwards: open and closed tickets
 
     Default to the current year
     """
@@ -48,6 +48,67 @@ def get_basic_milestone_history_query(chosen_year=None):
             )                
     
 
+def view_single_repo_history(request, repo_name):
+    """
+    Show milestones from this repository and any child repositories (direct children, e.g. 1-level)
+    :param request:
+    :param repo_name:
+    :return:
+    """
+    milestones = get_single_repo_milestone_query(is_open=False)
+
+    try:
+        chosen_repo = Repository.objects.select_related('organization', 'parent_repository').get(is_visible=True, github_name=repo_name)
+    except Repository.DoesNotExist:
+        raise Http404("Repository not found: %s" % repo_name)
+
+    # Repository has no parent -- so it is a parent
+    # Pull milestones:
+    #   - from this repository  (e.g. dataverse)
+    #   - any repositories that have this repo as a parent  (e.g. geoconnect)
+    #
+    if not chosen_repo.parent_repository:
+        milestones = milestones.filter(Q(repository=chosen_repo)|Q(repository__parent_repository=chosen_repo))
+    else:
+        # This is a child repository, only show its milestones
+        milestones = milestones.filter(repository=chosen_repo)
+
+    milestones_list = list(milestones.order_by('-due_on'))
+
+    #current_date = datetime.now()
+    #for ms in milestones_list:
+    #    if ms.due_on:
+    #        ms.days_remaining = ms.due_on.replace(tzinfo=None) - current_date#.date()
+
+
+    #open_closed_cnts = milestones.values('open_issues', 'closed_issues')
+    open_closed_cnts = get_issue_counts_query_base(chosen_repo).values('open_issues', 'closed_issues')
+    num_open_issues = sum(x['open_issues'] for x in open_closed_cnts)
+    num_closed_issues = sum( x['closed_issues'] for x in open_closed_cnts)
+
+    d = {}
+    d['is_milestone_history_single_repository'] = True
+    d['repos'] = Repository.objects.select_related('organization', 'parent_repository').filter(parent_repository__isnull=True).filter(is_visible=True)
+
+    d['page_title'] = 'Previous Milestones: %s' % chosen_repo
+    d['page_title_link'] = chosen_repo.get_github_view_url()
+    #d['page_title_link'] = chosen_repo.get_github_view_milestones_url()
+
+    d['chosen_repository'] = chosen_repo
+    d['milestone_count'] = len(milestones_list)#.count()
+    d['milestones'] = milestones_list
+
+    d['num_open_issues'] = num_open_issues
+    d['num_closed_issues'] = num_closed_issues
+
+    d['SINGLE_COLUMN'] = True
+    #print(d)
+    return render_to_response('milestones/view_single_repo_history.html'\
+                              , d\
+                              , context_instance=RequestContext(request))
+    
+    
+
 def view_milestone_history(request, chosen_year=None):
     """
     http://127.0.0.1:8000/milestones/by-columns/
@@ -74,7 +135,7 @@ def view_milestone_history(request, chosen_year=None):
     d = {}
 
     d['page_title'] = 'Previous Milestones for %s' % chosen_year
-    d['is_milestone_history'] = True
+    d['is_milestone_history_all'] = True
     d['chosen_year'] = chosen_year
     d['last_retrieval_time'] = last_retrieval_time
     d['sorted_repos'] = sorted_repos
@@ -89,4 +150,5 @@ def view_milestone_history(request, chosen_year=None):
     return render_to_response('milestones/view_history_multi_column.html'\
                               , d\
                               , context_instance=RequestContext(request))
+
 

@@ -9,9 +9,9 @@
     {% endif %}
     {% for r in repos %}
     {% if r == chosen_repository %}
-        <a class="btn btn btn-primary" href="{% url 'view_single_repo_column' r.github_name %}">{{ r.display_name }}</a>
+        <a class="btn btn btn-primary" href="{% url 'view_single_repo' r.github_name %}">{{ r.display_name }}</a>
     {% else %}
-         <a class="btn btn btn-default" href="{% url 'view_single_repo_column' r.github_name %}">{{ r.display_name }}</a>
+         <a class="btn btn btn-default" href="{% url 'view_single_repo' r.github_name %}">{{ r.display_name }}</a>
     {% endif %}
     {% endfor %}
 </div>

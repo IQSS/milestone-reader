@@ -8,7 +8,9 @@ urlpatterns = patterns('apps.milestones.views_history',
 
     url(r'^milestone-history/(?P<chosen_year>(\d){4})/$', 'view_milestone_history', name="view_milestone_history_by_year"),
 
-    #url(r'^milestone-roadmap/(?P<repo_name>(\-|_|\w){1,120})/$', 'view_single_repo_column', name="view_single_repo_column"),
+    url(r'^milestone-history-single/(?P<repo_name>(\-|_|\w){1,120})/$', 'view_single_repo_history', name="view_single_repo_history"),
+
+    #url(r'^milestone-roadmap/(?P<repo_name>(\-|_|\w){1,120})/$', 'view_single_repo', name="view_single_repo"),
 
 )
 
@@ -20,7 +22,7 @@ urlpatterns += patterns('apps.milestones.views',
 
     url(r'^milestone-roadmap/$', 'view_by_columns', name="view_by_columns"),
 
-    url(r'^milestone-roadmap/(?P<repo_name>(\-|_|\w){1,120})/$', 'view_single_repo_column', name="view_single_repo_column"),
+    url(r'^milestone-roadmap/(?P<repo_name>(\-|_|\w){1,120})/$', 'view_single_repo', name="view_single_repo"),
 
     url(r'^$', 'view_by_columns', name="view_by_columns_default"),
 

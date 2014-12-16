@@ -43,12 +43,23 @@
    
         <h4>{{ page_title }}
    
-          {% if is_milestone_history %}
-            &nbsp; <span style="font-weight:normal; font-size:80%;"><a href="{% url 'view_by_columns' %}">(View upcoming milestones)</a></span>
-            {% else %}{% if is_current_milestones_all %}
+        {% if is_milestone_history_all %}
+
+                &nbsp; <span style="font-weight:normal; font-size:80%;"><a href="{% url 'view_by_columns' %}">(View upcoming milestones)</a></span>
+
+        {% else %}{% if is_current_milestones_all %}
             
-            &nbsp; <span style="font-weight:normal; font-size:80%;"><a href="{% url 'view_milestone_history' %}">(View previous milestones)</a></span>            
-            {% endif %}{% endif %}
+                &nbsp; <span style="font-weight:normal; font-size:80%;"><a href="{% url 'view_milestone_history' %}">(View previous milestones)</a></span>            
+
+        {% else %}{% if is_current_milestones_single_repository %}
+
+                &nbsp; <span style="font-weight:normal; font-size:80%;"><a href="{% url 'view_single_repo_history' chosen_repository.github_name %}">(View previous milestones)</a></span>            
+
+       {% else %}{% if is_milestone_history_single_repository %}
+
+                &nbsp; <span style="font-weight:normal; font-size:80%;"><a href="{% url 'view_single_repo' chosen_repository.github_name %}">(View upcoming milestones)</a></span>            
+
+       {% endif %}{% endif %}{% endif %}{% endif %}
             
         </h4>
       {% block content %}
