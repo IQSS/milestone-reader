@@ -71,7 +71,8 @@ def view_by_columns(request):
 
     d = {}
 
-    d['page_title'] = 'Current Project Milestones'
+    d['is_current_milestones_all'] = True
+    d['page_title'] = 'Product Milestones'
     d['last_retrieval_time'] = last_retrieval_time
     d['sorted_repos'] = sorted_repos
     d['organized_months'] = mmo.get_organized_months()

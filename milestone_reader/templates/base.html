@@ -41,16 +41,16 @@
 
     <div class="container">
    
-        <h4>{{ page_title }}</h4>
+        <h4>{{ page_title }}
    
-        {% comment %}
-        {% if page_title_link %}
-          <h4><a href="{{ page_title_link }}">{{ page_title }}</a></h4>
-        {% else %}
-          <h4><a href="http://datascience.iq.harvard.edu">{{ page_title }}</a></h4>
-        {% endif %}<br />
-        {% endcomment %}
-
+          {% if is_milestone_history %}
+            &nbsp; <span style="font-weight:normal; font-size:80%;"><a href="{% url 'view_by_columns' %}">(View upcoming milestones)</a></span>
+            {% else %}{% if is_current_milestones_all %}
+            
+            &nbsp; <span style="font-weight:normal; font-size:80%;"><a href="{% url 'view_milestone_history' %}">(View previous milestones)</a></span>            
+            {% endif %}{% endif %}
+            
+        </h4>
       {% block content %}
       <div class="well">
         <ul>

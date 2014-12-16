@@ -1,11 +1,8 @@
 <table class="table table-condensed" id="mstone_table">
     <thead>
         <tr>
-            {% if is_milestone_history %}
-            <th style="font-weight:normal"><a href="{% url 'view_by_columns' %}">(current milestones)</a></th>
-            {% else %}
-            <th style="font-weight:normal"><a href="{% url 'view_milestone_history' %}">(milestone history)</a></th>            
-            {% endif %}
+            <th>&nbsp;</th>
+          
             {% for repo in sorted_repos %}
              <th><a class="btn btn-primary btn-default" href="{% url 'view_single_repo_column' repo.github_name %}" data-toggle="popoverb" title="{{ repo }}" data-content-target="#repo-desc-{{ repo.id }}">{{ repo }}</a>
             {# <!-- hidden div with repository description.  shown when hovering over repo name--> #} 
